@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <title>Vending Machine</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/style.css">
+
+   <body>
+     <div class="container">
+        <h1 class="text-center" id="mainHeading">Vending Machine</h1>
+        <hr>
+     </div>
+
+    <div class="container">
+       <ul class="list-group" id="errorMessages"></ul>
+       <div class="row">
+         <div class="col-8">
+
+           <div id="vendingDiv">
+             <div class="row">
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-1">1</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-1"></h5>
+                  <p class="card-text text-center" id="candy-price-1"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-1"></div>
+              </div>
+
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-2">2</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-2"></h5>
+                  <p class="card-text text-center" id="candy-price-2"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-2"></div>
+              </div>
+
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-3">3</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-3"></h5>
+                  <p class="card-text text-center" id="candy-price-3"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-3"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-4">4</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-4"></h5>
+                  <p class="card-text text-center" id="candy-price-4"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-4"></div>
+              </div>
+
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-5">5</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-5"></h5>
+                  <p class="card-text text-center" id="candy-price-5"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-5"></div>
+              </div>
+
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-6">6</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-6"></h5>
+                  <p class="card-text text-center" id="candy-price-6"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-6"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-7">7</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-7"></h5>
+                  <p class="card-text text-center" id="candy-price-7"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-7"></div>
+              </div>
+
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-8">8</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-8"></h5>
+                  <p class="card-text text-center" id="candy-price-8"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-8"></div>
+              </div>
+
+              <div class="card m-3" style="width: 12rem;">
+                <div class="card-header text-left" id="card-header-9">9</div>
+                <div class="card-body">
+                  <h5 class="card-title text-center" id="candy-name-9"></h5>
+                  <p class="card-text text-center" id="candy-price-9"></p>
+                </div>
+                <div class="card-footer" id="quantity-left-9"></div>
+              </div>
+            </div>
+
+          </div>
+         </div>
+         <div id="controls" class="col-4>">
+           <div id="totalDiv">
+            <h2 class="text-center mb-2" id="totalHeading">Total $ In</h2>
+            <input id="totalInput" class="text-center m-2" type="text" READONLY/>
+            <div class="row mb-2">
+              <div class="col-sm-6">
+              <button type="button"
+                      id="add-dollar-button"
+                      class="btn btn-default mb-2">
+                      Add Dollar
+              </button>
+              <br>
+              <button type="button"
+                      id="add-dime-button"
+                      class="btn btn-default mb-2">
+                      Add Dime
+              </button>
+            </div>
+            <div class="col-sm-6">
+              <button type="button"
+                      id="add-quarter-button"
+                      class="btn btn-default mb-2">
+                      Add Quarter
+              </button>
+              <br>
+              <button type="button"
+                      id="add-nickel-button"
+                      class="btn btn-default mb-2">
+                      Add Nickel
+              </button>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div id="messagesDiv">
+          <h2 class="text-center mb-2" id="messagesHeading">Messages</h2>
+          <input id = "messagesInput" class="text-center mb-2" type="text" readonly/>
+          <br>
+          <label for="itemInput">Item: </label>
+          <input id = "itemInput" class="mb-2" type="text" readonly/>
+          <br>
+          <button type="button"
+                  id="make-purchase"
+                  class="btn btn-default mb-2">
+                  MakePurchase
+          </button>
+          <hr>
+        </div>
+        <div id="changeDiv">
+          <h2 class="text-center mb-2" id="changeHeading">Change</h2>
+          <input id = "changeInput" class="mb-2" type="text" readonly/>
+          <br>
+          <button type="button"
+                  id="change-return"
+                  class="btn btn-default mb-2">
+                  Change Return
+          </button>
+        </div>
+
+
+
+
+
+
+
+         </div>
+       </div>
+
+
+     </div>
+
+          <script src="js/jquery-2.2.4.min.js"></script>
+          <script src="js/vendingMachine.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </body>
