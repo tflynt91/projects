@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BattleShip.BLL",
+    "\\BattleShip.BLL\\GameLogic",
+    "\\BattleShip.BLL\\Requests",
+    "\\BattleShip.BLL\\Ships",
+    "\\Battleship.Tests",
+    "\\BattleShip.UI",
+    "\\BattleShip.UI\\UserInterface"
+  ],
+  "SelectedNode": "\\BattleShip.UI\\UserInterface\\Workflow.cs",
+  "PreviewInSolutionExplorer": false
+}

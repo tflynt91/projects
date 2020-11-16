@@ -1,0 +1,16 @@
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\02-Classes-And-Objects\Assessments\Battleship\BattleShip_Start\BattleShip.UI\bin\Debug\BattleShip.UI.exe.config
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\02-Classes-And-Objects\Assessments\Battleship\BattleShip_Start\BattleShip.UI\bin\Debug\BattleShip.UI.exe
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\02-Classes-And-Objects\Assessments\Battleship\BattleShip_Start\BattleShip.UI\bin\Debug\BattleShip.UI.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\02-Classes-And-Objects\Assessments\Battleship\BattleShip_Start\BattleShip.UI\obj\Debug\BattleShip.UI.csprojResolveAssemblyReference.cache
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\02-Classes-And-Objects\Assessments\Battleship\BattleShip_Start\BattleShip.UI\obj\Debug\BattleShip.UI.exe
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\02-Classes-And-Objects\Assessments\Battleship\BattleShip_Start\BattleShip.UI\obj\Debug\BattleShip.UI.pdb
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.UI.exe.config
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.UI.exe
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.UI.pdb
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csprojAssemblyReference.cache
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csproj.CoreCompileInputs.cache
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.exe
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.pdb
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.BLL.dll
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.BLL.pdb
+C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csproj.CopyComplete
