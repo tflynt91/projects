@@ -1,5 +1,6 @@
 ﻿namespace DvdLibrary.Migrations
 {
+    using DvdLibrary.Models.Queries;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +15,18 @@
 
         protected override void Seed(DvdLibrary.Models.Repos.DvdRepositoryEF context)
         {
-            //  This method will be called after migrating to the latest version.
+            context.DvdItems.AddOrUpdate(
+                m => m.DvdId,
+                new DvdItem
+                {
+                    Title = "Star Wars",
+                    Director = "George Lucas",
+                    RatingType = "PG",
+                    ReleaseYear = "1977"
+                }
+                );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            context.SaveChanges();
 
             
         }

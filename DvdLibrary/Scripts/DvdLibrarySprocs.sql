@@ -97,7 +97,7 @@ IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
 GO
 
 CREATE PROCEDURE CreateDvd (
-	@DvdId int,
+	@DvdId int output,
 	@DvdTitle nvarchar(50),
 	@ReleaseYear varchar(4),
 	@Director nvarchar(50),
@@ -105,8 +105,8 @@ CREATE PROCEDURE CreateDvd (
 	@Notes nvarchar(500)
 ) AS
 BEGIN
-	INSERT INTO DvdItem (DvdId, DvdTitle, ReleaseYear, Director, Rating, Notes)
-	VALUES (@DvdId, @DvdTitle, @ReleaseYear, @Director, @Rating, @Notes);
+	INSERT INTO DvdItem (DvdTitle, ReleaseYear, Director, Rating, Notes)
+	VALUES (@DvdTitle, @ReleaseYear, @Director, @Rating, @Notes);
 
 	SET @DvdId = SCOPE_IDENTITY();
 END

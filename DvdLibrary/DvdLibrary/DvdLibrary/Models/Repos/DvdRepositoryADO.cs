@@ -228,19 +228,19 @@ namespace DvdLibrary.Models.Repos
             return dvds;
         }
 
-        public void UpdateDvd(string dvdId, string title, string releaseYear, string director, string rating, string notes)
+        public void UpdateDvd(DvdItem dvdItem)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("UpdateDvd", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@DvdId", dvdId);
-                cmd.Parameters.AddWithValue("@DvdTitle", title);
-                cmd.Parameters.AddWithValue("@ReleaseYear", releaseYear);
-                cmd.Parameters.AddWithValue("@Director", director);
-                cmd.Parameters.AddWithValue("@Rating", rating);
-                cmd.Parameters.AddWithValue("@Notes", notes);
+                cmd.Parameters.AddWithValue("@DvdId", dvdItem.DvdId);
+                cmd.Parameters.AddWithValue("@DvdTitle", dvdItem.Title);
+                cmd.Parameters.AddWithValue("@ReleaseYear", dvdItem.ReleaseYear);
+                cmd.Parameters.AddWithValue("@Director", dvdItem.Director);
+                cmd.Parameters.AddWithValue("@Rating", dvdItem.RatingType);
+                cmd.Parameters.AddWithValue("@Notes", dvdItem.Notes);
 
                 cn.Open();
 
@@ -248,22 +248,29 @@ namespace DvdLibrary.Models.Repos
             }
         }
 
-        void IDvdRepository.CreateDvd(string title, string releaseYear, string director, string rating, string notes)
+        void IDvdRepository.CreateDvd(DvdItem dvdItem)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("UpdateDvd", cn);
+                SqlCommand cmd = new SqlCommand("CreateDvd", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@DvdTitle", title);
-                cmd.Parameters.AddWithValue("@ReleaseYear", releaseYear);
-                cmd.Parameters.AddWithValue("@Director", director);
-                cmd.Parameters.AddWithValue("@Rating", rating);
-                cmd.Parameters.AddWithValue("@Notes", notes);
+                SqlParameter param = new SqlParameter("@DvdId", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add(param);
+
+                cmd.Parameters.AddWithValue("@DvdTitle", dvdItem.Title);
+                cmd.Parameters.AddWithValue("@ReleaseYear", dvdItem.ReleaseYear);
+                cmd.Parameters.AddWithValue("@Director", dvdItem.Director);
+                cmd.Parameters.AddWithValue("@Rating", dvdItem.RatingType);
+                cmd.Parameters.AddWithValue("@Notes", dvdItem.Notes);
 
                 cn.Open();
 
                 cmd.ExecuteNonQuery();
+
+                dvdItem.DvdId = (int)param.Value;
             }
         }
     }

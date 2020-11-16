@@ -17,16 +17,18 @@ namespace DvdLibrary.Models.Repos
 
         public DbSet<DvdItem> DvdItems { get; set; }
 
-        public void CreateDvd(string title, string releaseYear, string director, string rating, string notes)
+        public void CreateDvd(DvdItem dvdItem)
         {
             DvdItem updatedItem = new DvdItem();
             updatedItem.DvdId = DvdItems.Max(d => d.DvdId) + 1;
-            updatedItem.Title = title;
-            updatedItem.Director = director;
-            updatedItem.RatingType = rating;
-            updatedItem.Notes = notes;
+            updatedItem.Title = dvdItem.Title;
+            updatedItem.ReleaseYear = dvdItem.ReleaseYear;
+            updatedItem.Director = dvdItem.Director;
+            updatedItem.RatingType = dvdItem.RatingType;
+            updatedItem.Notes = dvdItem.Notes;
            
             DvdItems.Add(updatedItem);
+            SaveChanges();
             
         }
 
@@ -35,6 +37,7 @@ namespace DvdLibrary.Models.Repos
             DvdItem deletedDvd = DvdItems.FirstOrDefault(d => d.DvdId == dvdId);
 
             DvdItems.Remove(deletedDvd);
+            SaveChanges();
         }
 
         public IEnumerable<DvdItem> GetDvdByDirectorName(string director)
@@ -74,21 +77,22 @@ namespace DvdLibrary.Models.Repos
 
         public IEnumerable<DvdItem> GetDvds()
         {
-            return DvdItems.Where(d => d.DvdId > 0);
+            return DvdItems;
         }
 
-        public void UpdateDvd(string dvdId, string title, string releaseYear, string director, string rating, string notes)
+        public void UpdateDvd(DvdItem dvdItem)
         {
             DvdItem updatedItem = new DvdItem();
-            updatedItem.DvdId = Int32.Parse(dvdId);
-            updatedItem.Title = title;
-            updatedItem.Director = director;
-            updatedItem.RatingType = rating;
-            updatedItem.ReleaseYear = releaseYear;
-            updatedItem.Notes = notes;
-            DvdItem dvdToUpdate = DvdItems.Where(d => d.DvdId == Int32.Parse(dvdId)).FirstOrDefault();
+            updatedItem.DvdId = dvdItem.DvdId;
+            updatedItem.Title = dvdItem.Title;
+            updatedItem.Director = dvdItem.Director;
+            updatedItem.RatingType = dvdItem.RatingType;
+            updatedItem.ReleaseYear = dvdItem.ReleaseYear;
+            updatedItem.Notes = dvdItem.Notes;
+            DvdItem dvdToUpdate = DvdItems.Where(d => d.DvdId == dvdItem.DvdId).FirstOrDefault();
             DvdItems.Remove(dvdToUpdate);
             DvdItems.Add(updatedItem);
+            SaveChanges();
         }
     }
 }

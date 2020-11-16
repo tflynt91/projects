@@ -84,20 +84,20 @@ namespace DvdLibrary.Controllers
             return Ok(found);
         }
 
-        [Route("dvd/")]
+        [Route("dvd")]
         [AcceptVerbs("POST")]
-        public IHttpActionResult CreateDvd(string title, string releaseYear, string director, string ratingType, string notes)
+        public IHttpActionResult CreateDvd(DvdItem dvdItem)
         {
-            _dvdRepository.CreateDvd(title, releaseYear, director, ratingType, notes);
+            _dvdRepository.CreateDvd(dvdItem);
 
-            return Ok();
+            return Created($"contact/{dvdItem.DvdId}", dvdItem); 
         }
 
         [Route("dvd/{id}")]
         [AcceptVerbs("PUT")]
-        public void UpdateDvd(string dvdId, string title, string releaseYear, string director, string ratingType, string notes)
+        public void UpdateDvd(DvdItem dvdItem)
         {
-            _dvdRepository.UpdateDvd(dvdId, title, releaseYear, director, ratingType, notes);
+            _dvdRepository.UpdateDvd(dvdItem);
         }
 
         [Route("dvd/{id}")]

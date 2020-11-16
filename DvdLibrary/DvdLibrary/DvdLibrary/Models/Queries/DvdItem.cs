@@ -9,7 +9,7 @@ namespace DvdLibrary.Models.Queries
     public class DvdItem
     {
         [Key]
-        public int DvdId { get; set; }
+        public int? DvdId { get; set; }
         public string Title { get; set; }
         public string ReleaseYear { get; set; }
         public string Director { get; set; }

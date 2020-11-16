@@ -11,25 +11,16 @@ GO
 USE DvdLibrary
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='Dvds')
-	DROP TABLE Dvds
+IF EXISTS(SELECT * FROM sys.tables WHERE name='DvdItem')
+	DROP TABLE DvdItem
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='Ratings')
-	DROP TABLE Ratings
-GO
-
-CREATE TABLE Ratings (
-	RatingId int identity(1,1) not null primary key,
-	Rating char(5) not null
-	)
-
-CREATE TABLE Dvds (
+CREATE TABLE DvdItem (
 	DvdId int identity(1,1) not null primary key,
 	DvdTitle nvarchar(50) not null,
 	ReleaseYear varchar(4) not null,
 	Director nvarchar(50) not null,
-	RatingId int not null foreign key references Ratings(RatingId),
+	Rating char(5) not null,
 	Notes nvarchar(500) null
 
 )

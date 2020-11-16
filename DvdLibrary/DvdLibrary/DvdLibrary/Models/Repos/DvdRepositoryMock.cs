@@ -49,10 +49,10 @@ namespace DvdLibrary.Repos
 
         public IEnumerable<DvdItem> GetDvdByRating(string rating)
         {
-            throw new NotImplementedException();
+            return _dvds.FindAll(d => d.RatingType == rating);
         }
 
-        public void CreateDvd(string title, string releaseYear, string director, string ratingType, string notes)
+        public void CreateDvd(DvdItem dvdItem)
         {
             DvdItem newDvd = new DvdItem();
 
@@ -65,25 +65,25 @@ namespace DvdLibrary.Repos
                 newDvd.DvdId = 0;
             }
 
-            newDvd.Title = title;
-            newDvd.ReleaseYear = releaseYear;
-            newDvd.Director = director;
-            newDvd.RatingType = ratingType;
-            newDvd.Notes = notes;
+            newDvd.Title = dvdItem.Title;
+            newDvd.ReleaseYear = dvdItem.ReleaseYear;
+            newDvd.Director = dvdItem.Director;
+            newDvd.RatingType = dvdItem.RatingType;
+            newDvd.Notes = dvdItem.Notes;
 
             _dvds.Add(newDvd);
             
         }
 
-        public void UpdateDvd(string dvdId, string title, string releaseYear, string director, string rating, string notes)
+        public void UpdateDvd(DvdItem dvdItem)
         {
             DvdItem updatedDvd = new DvdItem();
-            _dvds.RemoveAll(d => d.DvdId == Int32.Parse(dvdId));
-            updatedDvd.Title = title;
-            updatedDvd.ReleaseYear = releaseYear;
-            updatedDvd.Director = director;
-            updatedDvd.RatingType = rating;
-            updatedDvd.Notes = notes;
+            _dvds.RemoveAll(d => d.DvdId == dvdItem.DvdId);
+            updatedDvd.Title = dvdItem.Title;
+            updatedDvd.ReleaseYear = dvdItem.ReleaseYear;
+            updatedDvd.Director = dvdItem.Director;
+            updatedDvd.RatingType = dvdItem.RatingType;
+            updatedDvd.Notes = dvdItem.Notes;
 
             _dvds.Add(updatedDvd);
         }

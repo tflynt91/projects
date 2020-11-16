@@ -15,8 +15,8 @@ namespace DvdLibrary.Models
         IEnumerable<DvdItem> GetDvdByReleaseYear(string year);
         IEnumerable<DvdItem> GetDvdByDirectorName(string director);
         IEnumerable<DvdItem> GetDvdByRating(string rating);
-        void CreateDvd(string title, string releaseYear, string director, string rating, string notes);
-        void UpdateDvd(string dvdId, string title, string releaseYear, string director, string rating, string notes);
+        void CreateDvd(DvdItem dvdItem);
+        void UpdateDvd(DvdItem dvdItem);
         void DeleteDvd(int dvdId);
 
 
