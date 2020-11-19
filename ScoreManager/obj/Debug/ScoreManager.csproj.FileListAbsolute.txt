@@ -1,0 +1,16 @@
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.exe.config
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.exe
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.pdb
+C:\Users\flynt\source\repos\ScoreManager\obj\Debug\ScoreManager.csprojAssemblyReference.cache
+C:\Users\flynt\source\repos\ScoreManager\obj\Debug\ScoreManager.csproj.CoreCompileInputs.cache
+C:\Users\flynt\source\repos\ScoreManager\obj\Debug\ScoreManager.exe
+C:\Users\flynt\source\repos\ScoreManager\obj\Debug\ScoreManager.pdb
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.Controllers.dll
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.Models.dll
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.View.dll
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.Data.dll
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.Controllers.pdb
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.Models.pdb
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.View.pdb
+C:\Users\flynt\source\repos\ScoreManager\bin\Debug\ScoreManager.Data.pdb
+C:\Users\flynt\source\repos\ScoreManager\obj\Debug\ScoreManager.csproj.CopyComplete
