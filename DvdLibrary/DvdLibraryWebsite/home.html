@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Dvd Library</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <div class="container">
+      <ul class="list-group" id="errorMessages"></ul>
+      <div id="navBar">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button type="button" id="createDvdButton" class="btn btn-primary col-2 mx-1">Create Dvd</button>
+                <button type="button" id="searchButton" class="btn btn-primary col-2 mx-1">Search</button>
+                <div class="form-inline col-2">
+                      <select class="form-control" id="searchDropDown" required>
+                        <option selected disabled>Search Category</option>
+                        <option>Title</option>
+                        <option>Release Year</option>
+                        <option>Director Name</option>
+                        <option>Rating</option>
+                      </select>
+                </div>
+                <form class="form-inline col-2">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search Term" aria-label="Search" id="searchField" required>
+                </form>
+     </nav>
+   </div>
+   <hr>
+   <div id="searchTableDiv">
+      <h2 id="seachCriteria"></h2>
+         <table id="searchTable" class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th width="30%">Title</th>
+                        <th width="20%">Release Date</th>
+                        <th width="20%">Director</th>
+                        <th width="10%">Rating</th>
+                        <th width="15%"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="contentRows"></tbody>
+            </table>
+      </div>
+
+      <div id="editDvdSection" style="display: none">
+      <h2 id="editDvdHeader">Edit Dvd: </h2>
+      <hr>
+        <form class="form-horizontal" role="form" id="editDvdForm">
+          <div class="form-group row">
+            <label for="edit-title" class="col-md-2 control-label">
+              Dvd Title:
+            </label>
+
+            <div class="col-md-8">
+              <input type="text"
+                     class="form-control"
+                     id="edit-title"
+                     placeholder="Enter Title" required/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="edit-release-year" class="col-md-2 control-label">
+              Release Year:
+            </label>
+
+            <div class="col-md-8">
+              <input type="text"
+                     pattern="\d{4}"
+                     class="form-control"
+                     id="edit-release-year"
+                     placeholder="Add Release Year" required/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="edit-director" class="col-md-2 control-label">
+              Director:
+            </label>
+
+            <div class="col-md-8">
+              <input type="text"
+                     class="form-control"
+                     id="edit-director"
+                     placeholder="Add Director"/>
+            </div>
+          </div>
+
+          <div class="form-group col-md-2 row">
+            <label for="edit-rating">Rating</label>
+              <select class="form-control" id="edit-rating">
+                  <option selected>Choose Rating</option>
+                  <option>G</option>
+                  <option>PG</option>
+                  <option>PG-13</option>
+                  <option>R</option>
+                  <option>NC-17</option>
+                  <option>NR</option>
+              </select>
+          </div>
+
+          <div class="form-group col-md-8 row">
+            <label for="edit-notes">Notes:</label>
+            <textarea class="form-control" id="edit-notes" rows="3"></textarea>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-offset-4 col-md-2">
+              <input type="hidden" id="edit-dvd-id">
+              <button type="button"
+                      id="edit-cancel-button"
+                      class="btn btn-default"
+                      onclick="hideEditForm()">
+                      Cancel
+              </button>
+            </div>
+            <div class="col-md-2">
+                <button type="button"
+                        id="edit-dvd-button"
+                        class="btn btn-default">Save Changes</button>
+            </div>
+          </div>
+        </form>
+    </div>
+
+    <div id="createDvdSection" style="display: none">
+    <h2 id="createDvdHeader">Create Dvd: </h2>
+    <hr>
+      <form class="form-horizontal" role="form" id="createDvdForm">
+        <div class="form-group row">
+          <label for="add-title" class="col-md-2 control-label">
+            Dvd Title:
+          </label>
+
+          <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   id="add-title"
+                   placeholder="Enter Title" required/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="add-release-year" class="col-md-2 control-label">
+            Release Year:
+          </label>
+
+          <div class="col-md-8">
+            <input type="text"
+                   pattern="\d{4}"
+                   class="form-control"
+                   id="add-release-year"
+                   placeholder="Add Release Year" required/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="add-director" class="col-md-2 control-label">
+            Director:
+          </label>
+
+          <div class="col-md-8">
+            <input type="text"
+                   class="form-control"
+                   id="add-director"
+                   placeholder="Add Director"/>
+          </div>
+        </div>
+
+        <div class="form-group col-md-2 row">
+          <label for="choose-rating">Rating</label>
+            <select class="form-control" id="choose-rating">
+                <option selected>Choose Rating</option>
+                <option>G</option>
+                <option>PG</option>
+                <option>PG-13</option>
+                <option>R</option>
+                <option>NC-17</option>
+                <option>NR</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-8 row">
+          <label for="add-notes">Notes:</label>
+          <textarea class="form-control" id="add-notes" rows="3"></textarea>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-2">
+            <button type="button"
+                    id="cancel-button"
+                    class="btn btn-default">Cancel</button>
+          </div>
+          <div class="col-md-2">
+              <button type="button"
+                      id="create-dvd-button"
+                      class="btn btn-default">Create Dvd</button>
+          </div>
+        </div>
+      </form>
+  </div>
+  </div>
+  </div>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/dvdLibrary.js"></script>
+
+  </body>
+</html>
