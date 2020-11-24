@@ -218,7 +218,7 @@ GO
 
 CREATE PROCEDURE InventoryReportNewVehicles AS
 BEGIN
-	SELECT v.[Year], mk.MakeType, mo.ModelType, COUNT(v.VinNumber) AS [Count], SUM(v.MSRP) AS [Stock Value] 
+	SELECT v.[Year], mk.MakeType, mo.ModelType, COUNT(v.VinNumber) AS [Count], SUM(v.MSRP) AS [StockValue] 
 	FROM Vehicles v
 		INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId
 		INNER JOIN MakeTypes mk ON mo.MakeTypeId = mk.MakeTypeId
@@ -235,7 +235,7 @@ GO
 
 CREATE PROCEDURE InventoryReportUsedVehicles AS
 BEGIN
-	SELECT v.[Year], mk.MakeType, mo.ModelType, COUNT(v.VinNumber) AS [Count], SUM(v.MSRP) AS [Stock Value] 
+	SELECT v.[Year], mk.MakeType, mo.ModelType, COUNT(v.VinNumber) AS [Count], SUM(v.MSRP) AS [StockValue] 
 	FROM Vehicles v
 		INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId
 		INNER JOIN MakeTypes mk ON mo.MakeTypeId = mk.MakeTypeId

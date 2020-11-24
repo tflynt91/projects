@@ -86,13 +86,13 @@ namespace GuildCars.Data
             }
         }
 
-        public IEnumerable<VehicleInventoryListingDetails> NewInventorySearch(VehicleInventorySearchParameters parameters)
+        public List<VehicleInventoryListingDetails> NewInventorySearch(VehicleInventorySearchParameters parameters)
         {
             List<VehicleInventoryListingDetails> inventoryResults = new List<VehicleInventoryListingDetails>();
 
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE v.NeworUsedTypeId = 1 ";
+                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles v INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE 1 = 1 AND v.NeworUsedTypeId = 1 ";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
 
@@ -145,25 +145,24 @@ namespace GuildCars.Data
                         VehicleInventoryListingDetails row = new VehicleInventoryListingDetails();
 
                         row.VinNumber = dr["VinNumber"].ToString();
-                        row.VinNumber = dr["@VinNumber"].ToString();
-                        row.ModelTypeId = (int)dr["@ModelTypeId"];
-                        row.ModelType = dr["@ModelType"].ToString();
-                        row.MakeTypeId = (int)dr["@MakeTypeId"];
-                        row.MakeType = dr["@MakeType"].ToString();
-                        row.BodyStyleId = (int)dr["@BodyStyleId"];
+                        row.ModelTypeId = (int)dr["ModelTypeId"];
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.MakeTypeId = (int)dr["MakeTypeId"];
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.BodyStyleId = (int)dr["BodyStyleId"];
                         row.BodyStyle = dr["BodyStyle"].ToString();
-                        row.InteriorColorId = (int)dr["@InteriorColorId"];
+                        row.InteriorColorId = (int)dr["InteriorColorId"];
                         row.InteriorColor = dr["InteriorColor"].ToString();
-                        row.ExteriorColorId = (int)dr["@ExteriorColorId"];
-                        row.ExteriorColor = dr["@ExteriorColor"].ToString();
-                        row.TransmissionTypeId = (int)dr["@TransmissionTypeId"];
-                        row.TransmissionType = dr["@TransmissionType"].ToString();
-                        row.ImageFileName = dr["@ImageFileName"].ToString();
-                        row.MSRP = (decimal)dr["@MSRP"];
-                        row.Mileage = (int)dr["@Mileage"];
-                        row.SalePrice = (decimal)dr["@SalePrice"];
-                        row.Year = (int)dr["@Year"];
-                        row.VehicleDescription = dr["@VehicleDescription"].ToString();
+                        row.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        row.ExteriorColor = dr["ExteriorColor"].ToString();
+                        row.TransmissionTypeId = (int)dr["TransmissionTypeId"];
+                        row.TransmissionType = dr["TransmissionType"].ToString();
+                        row.ImageFileName = dr["ImageFileName"].ToString();
+                        row.MSRP = (decimal)dr["MSRP"];
+                        row.Mileage = (int)dr["Mileage"];
+                        row.SalePrice = (decimal)dr["SalePrice"];
+                        row.Year = (int)dr["Year"];
+                        row.VehicleDescription = dr["VehicleDescription"].ToString();
 
                         inventoryResults.Add(row);
                     }
@@ -173,13 +172,13 @@ namespace GuildCars.Data
             return inventoryResults;
         }
 
-        public IEnumerable<VehicleInventoryListingDetails> UsedInventorySearch(VehicleInventorySearchParameters parameters)
+        public List<VehicleInventoryListingDetails> UsedInventorySearch(VehicleInventorySearchParameters parameters)
         {
             List<VehicleInventoryListingDetails> inventoryResults = new List<VehicleInventoryListingDetails>();
 
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE v.NeworUsedTypeId = 2 ";
+                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles v INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE v.NeworUsedTypeId = 2 ";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
 
@@ -232,25 +231,24 @@ namespace GuildCars.Data
                         VehicleInventoryListingDetails row = new VehicleInventoryListingDetails();
 
                         row.VinNumber = dr["VinNumber"].ToString();
-                        row.VinNumber = dr["@VinNumber"].ToString();
-                        row.ModelTypeId = (int)dr["@ModelTypeId"];
-                        row.ModelType = dr["@ModelType"].ToString();
-                        row.MakeTypeId = (int)dr["@MakeTypeId"];
-                        row.MakeType = dr["@MakeType"].ToString();
-                        row.BodyStyleId = (int)dr["@BodyStyleId"];
+                        row.ModelTypeId = (int)dr["ModelTypeId"];
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.MakeTypeId = (int)dr["MakeTypeId"];
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.BodyStyleId = (int)dr["BodyStyleId"];
                         row.BodyStyle = dr["BodyStyle"].ToString();
-                        row.InteriorColorId = (int)dr["@InteriorColorId"];
+                        row.InteriorColorId = (int)dr["InteriorColorId"];
                         row.InteriorColor = dr["InteriorColor"].ToString();
-                        row.ExteriorColorId = (int)dr["@ExteriorColorId"];
-                        row.ExteriorColor = dr["@ExteriorColor"].ToString();
-                        row.TransmissionTypeId = (int)dr["@TransmissionTypeId"];
-                        row.TransmissionType = dr["@TransmissionType"].ToString();
-                        row.ImageFileName = dr["@ImageFileName"].ToString();
-                        row.MSRP = (decimal)dr["@MSRP"];
-                        row.Mileage = (int)dr["@Mileage"];
-                        row.SalePrice = (decimal)dr["@SalePrice"];
-                        row.Year = (int)dr["@Year"];
-                        row.VehicleDescription = dr["@VehicleDescription"].ToString();
+                        row.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        row.ExteriorColor = dr["ExteriorColor"].ToString();
+                        row.TransmissionTypeId = (int)dr["TransmissionTypeId"];
+                        row.TransmissionType = dr["TransmissionType"].ToString();
+                        row.ImageFileName = dr["ImageFileName"].ToString();
+                        row.MSRP = (decimal)dr["MSRP"];
+                        row.Mileage = (int)dr["Mileage"];
+                        row.SalePrice = (decimal)dr["SalePrice"];
+                        row.Year = (int)dr["Year"];
+                        row.VehicleDescription = dr["VehicleDescription"].ToString();
 
                         inventoryResults.Add(row);
                     }
@@ -289,7 +287,7 @@ namespace GuildCars.Data
             }
         }
 
-        public IEnumerable<InventoryReportRow> NewVehicleInventoryReport()
+        public List<InventoryReportRow> NewVehicleInventoryReport()
         {
             List<InventoryReportRow> newInventoryReport = new List<InventoryReportRow>();
 
@@ -306,11 +304,11 @@ namespace GuildCars.Data
                     {
                         InventoryReportRow row = new InventoryReportRow();
 
-                        row.Year = (int)dr["@Year"];
-                        row.ModelType = dr["@ModelType"].ToString();
-                        row.MakeType = dr["@MakeType"].ToString();
-                        row.Count = (int)dr["@Count"];
-                        row.StockValue = (decimal)dr["@StockValue"];
+                        row.Year = (int)dr["Year"];
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.Count = (int)dr["Count"];
+                        row.StockValue = (decimal)dr["StockValue"];
 
 
                         newInventoryReport.Add(row);
@@ -321,7 +319,7 @@ namespace GuildCars.Data
             return newInventoryReport;
         }
 
-        public IEnumerable<InventoryReportRow> UsedVehicleInventoryReport()
+        public List<InventoryReportRow> UsedVehicleInventoryReport()
         {
             List<InventoryReportRow> usedInventoryReport = new List<InventoryReportRow>();
 
@@ -338,11 +336,11 @@ namespace GuildCars.Data
                     {
                         InventoryReportRow row = new InventoryReportRow();
 
-                        row.Year = (int)dr["@Year"];
-                        row.ModelType = dr["@ModelType"].ToString();
-                        row.MakeType = dr["@MakeType"].ToString();
-                        row.Count = (int)dr["@Count"];
-                        row.StockValue = (decimal)dr["@StockValue"];
+                        row.Year = (int)dr["Year"];
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.Count = (int)dr["Count"];
+                        row.StockValue = (decimal)dr["StockValue"];
 
 
                         usedInventoryReport.Add(row);

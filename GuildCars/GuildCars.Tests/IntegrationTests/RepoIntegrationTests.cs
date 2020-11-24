@@ -69,6 +69,54 @@ namespace GuildCars.Tests.IntegrationTests
 
         }
 
-        
+        [Test]
+        public void CanSearchNewInventory()
+        {
+            var repo = new VehicleInventoryRepository();
+            VehicleInventorySearchParameters parameters = new VehicleInventorySearchParameters();
+
+            parameters.MinPrice = 13500M;
+
+            var minPriceSearchResults = repo.NewInventorySearch(parameters);
+
+            Assert.AreEqual(2, minPriceSearchResults.Count);
+            Assert.AreEqual("2D4FV48V05H529506", minPriceSearchResults[0].VinNumber);
+        }
+
+        [Test]
+        public void CanSearchUsedInventory()
+        {
+            var repo = new VehicleInventoryRepository();
+            VehicleInventorySearchParameters parameters = new VehicleInventorySearchParameters();
+
+            parameters.MaxPrice = 11500M;
+
+            var maxPriceSearchResults = repo.UsedInventorySearch(parameters);
+
+            Assert.AreEqual(1, maxPriceSearchResults.Count);
+            Assert.AreEqual("JN1CA21DXXT805880", maxPriceSearchResults[0].VinNumber);
+        }
+
+        [Test]
+        public void CanLoadNewCarInventoryReport()
+        {
+            var repo = new VehicleInventoryRepository();
+            var report = repo.NewVehicleInventoryReport();
+
+            Assert.AreEqual(2, report.Count);
+            Assert.AreEqual(30000, report[0].StockValue);
+            Assert.AreEqual(2020, report[0].Year);
+        }
+
+        [Test]
+        public void CanLoadUsedCarInventoryReport()
+        {
+            var repo = new VehicleInventoryRepository();
+            var report = repo.UsedVehicleInventoryReport();
+
+            Assert.AreEqual(1, report.Count);
+            Assert.AreEqual(26000, report[0].StockValue);
+            Assert.AreEqual(2019, report[0].Year);
+        }
     }
 }
