@@ -5,28 +5,28 @@ IF EXISTS(SELECT * FROM sys.tables WHERE name='Sales')
 	DROP TABLE Sales
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='Vehicle')
-	DROP TABLE Vehicle
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Vehicles')
+	DROP TABLE Vehicles
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='NeworUsedType')
-	DROP TABLE NeworUsedType
+IF EXISTS(SELECT * FROM sys.tables WHERE name='NeworUsedTypes')
+	DROP TABLE NeworUsedTypes
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='ExteriorColor')
-	DROP TABLE ExteriorColor
+IF EXISTS(SELECT * FROM sys.tables WHERE name='ExteriorColors')
+	DROP TABLE ExteriorColors
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='InteriorColor')
-	DROP TABLE InteriorColor
+IF EXISTS(SELECT * FROM sys.tables WHERE name='InteriorColors')
+	DROP TABLE InteriorColors
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='BodyStyle')
-	DROP TABLE BodyStyle
+IF EXISTS(SELECT * FROM sys.tables WHERE name='BodyStyles')
+	DROP TABLE BodyStyles
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='TransmissionType')
-	DROP TABLE TransmissionType
+IF EXISTS(SELECT * FROM sys.tables WHERE name='TransmissionTypes')
+	DROP TABLE TransmissionTypes
 GO
 
 IF EXISTS(SELECT * FROM sys.tables WHERE name='Contacts')
@@ -37,23 +37,23 @@ IF EXISTS(SELECT * FROM sys.tables WHERE name='States')
 	DROP TABLE States
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='ModelType')
-	DROP TABLE ModelType
+IF EXISTS(SELECT * FROM sys.tables WHERE name='ModelTypes')
+	DROP TABLE ModelTypes
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='MakeType')
-	DROP TABLE MakeType
+IF EXISTS(SELECT * FROM sys.tables WHERE name='MakeTypes')
+	DROP TABLE MakeTypes
 GO
 
 IF EXISTS(SELECT * FROM sys.tables WHERE name='Specials')
 	DROP TABLE Specials
 GO
 
-IF EXISTS(SELECT * FROM sys.tables WHERE name='PurchaseType')
-	DROP TABLE PurchaseType
+IF EXISTS(SELECT * FROM sys.tables WHERE name='PurchaseTypes')
+	DROP TABLE PurchaseTypes
 GO
 
-CREATE TABLE PurchaseType (
+CREATE TABLE PurchaseTypes (
 	PurchaseTypeId int identity(1,1) not null primary key,
 	PurchaseType varchar(15) not null
 )
@@ -65,16 +65,16 @@ CREATE TABLE Specials (
 	SpecialDescription nvarchar(500) not null
 )
 
-CREATE TABLE MakeType (
+CREATE TABLE MakeTypes (
 	MakeTypeId int identity(1,1) not null primary key,
 	MakeType nvarchar(30) not null,
 	DateAdded datetime2 not null default(getdate()),
 	UserId nvarchar(128) not null
 )
 
-CREATE TABLE ModelType (
+CREATE TABLE ModelTypes (
 	ModelTypeId int identity(1,1) not null primary key,
-	MakeTypeId int not null foreign key references MakeType(MakeTypeId),	
+	MakeTypeId int not null foreign key references MakeTypes(MakeTypeId),	
 	ModelType nvarchar(50) not null,
 	DateAdded datetime2 not null default(getdate()),
 	UserId nvarchar(128) not null
@@ -94,52 +94,53 @@ CREATE TABLE Contacts (
 	[Message] nvarchar(500) not null
 )
 
-CREATE TABLE TransmissionType (
+CREATE TABLE TransmissionTypes (
 	TransmissionTypeId int identity(1,1) not null primary key,
 	TransmissionType nvarchar(30) not null
 )
 
-CREATE TABLE BodyStyle (
+CREATE TABLE BodyStyles (
 	BodyStyleId int identity(1,1) not null primary key,
 	BodyStyle nvarchar(40) not null
 )
 
-CREATE TABLE InteriorColor (
+CREATE TABLE InteriorColors (
 	InteriorColorId int identity(1,1) not null primary key,
 	InteriorColor nvarchar(15) not null
 )
 
-CREATE TABLE ExteriorColor (
+CREATE TABLE ExteriorColors (
 	ExteriorColorId int identity(1,1) not null primary key,
 	ExteriorColor nvarchar(15) not null
 )
 
-CREATE TABLE NewOrUsedType (
+CREATE TABLE NewOrUsedTypes (
 	NewOrUsedTypeId int identity(1,1) not null primary key,
 	NeworUsedType varchar(4) not null
 )
 
-CREATE TABLE Vehicle (
+CREATE TABLE Vehicles (
 	VinNumber int not null primary key,
-	ModelTypeId int not null foreign key references ModelType(ModelTypeId),
-	BodyStyleId int null foreign key references BodyStyle(BodyStyleId),
-	InteriorColorId int null foreign key references InteriorColor(InteriorColorId),
-	ExteriorColorId int null foreign key references ExteriorColor(ExteriorColorId),
-	TransmissionTypeId int null foreign key references TransmissionType(TransmissionTypeId),
-	NeworUsedTypeId int not null foreign key references NewOrUsedType(NewOrUsedTypeId),
+	ModelTypeId int not null foreign key references ModelTypes(ModelTypeId),
+	BodyStyleId int null foreign key references BodyStyles(BodyStyleId),
+	InteriorColorId int null foreign key references InteriorColors(InteriorColorId),
+	ExteriorColorId int null foreign key references ExteriorColors(ExteriorColorId),
+	TransmissionTypeId int null foreign key references TransmissionTypes(TransmissionTypeId),
+	NeworUsedTypeId int not null foreign key references NewOrUsedTypes(NewOrUsedTypeId),
 	ImageFileName varchar(50) not null,
 	MSRP decimal(8,2) null,
 	Mileage int null,
 	SalePrice decimal(8,2) null,
 	[Year] datetime2 null,
 	VehicleDescription nvarchar(500) not null,
-	Sold bit not null
+	Sold bit not null,
+	Feautured bit not null
 )
 
 CREATE TABLE Sales (
 	SalesId int identity(1,1) not null primary key,
 	UserId nvarchar(128) not null,
-	VinNumber int not null foreign key references Vehicle(VinNumber),
+	VinNumber int not null foreign key references Vehicles(VinNumber),
 	PurchasePrice decimal(8,2) not null,
 	PurchaseDate datetime2 not null,
 	FirstName nvarchar(30) not null,
@@ -151,7 +152,7 @@ CREATE TABLE Sales (
 	City nvarchar(30) not null,
 	StateId char(2) not null foreign key references States(StateId),
 	ZipCode varchar(10) not null,
-	PurchaseTypeId int not null foreign key references PurchaseType(PurchaseTypeId)
+	PurchaseTypeId int not null foreign key references PurchaseTypes(PurchaseTypeId)
 )
 
 
