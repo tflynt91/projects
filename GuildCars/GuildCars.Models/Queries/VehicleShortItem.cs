@@ -9,9 +9,7 @@ namespace GuildCars.Models.Queries
     public class VehicleShortItem
     {
         public string VinNumber { get; set; }
-        public int ModelTypeId { get; set; }
         public string ModelType { get; set; }
-        public int MakeTypeId { get; set; }
         public string MakeType { get; set; }
         public string ImageFileName { get; set; }
         public decimal SalePrice { get; set; }

@@ -350,5 +350,209 @@ namespace GuildCars.Data
 
             return usedInventoryReport;
         }
+
+        public void Delete(string vinNumber)
+        {
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("VehicleDelete", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@VinNumber", vinNumber);
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void AddMake(AddMakeParameters makeParameters)
+        {
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("MakeTypeInsert", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param = new SqlParameter("@MakeTypeId", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add(param);
+
+                cmd.Parameters.AddWithValue("@MakeType", makeParameters.MakeType);
+                cmd.Parameters.AddWithValue("@UserId", makeParameters.UserId);
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+
+                makeParameters.MakeTypeId = (int)param.Value;
+
+            }
+        }
+
+        public List<AddMakeDetail> GetMakeDetails()
+        {
+            List<AddMakeDetail> addMakeDetails = new List<AddMakeDetail>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("GetMakeTypeDetails", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        AddMakeDetail row = new AddMakeDetail();
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.DateAdded = (DateTime)dr["DateAdded"];
+                        row.Email = dr["Email"].ToString();
+
+                        addMakeDetails.Add(row);
+                    }
+                }
+            }
+
+            return addMakeDetails;
+        }
+
+        public void AddModel(AddModelParameters modelParameters)
+        {
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("ModelTypeInsert", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param = new SqlParameter("@ModelTypeId", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add(param);
+
+                cmd.Parameters.AddWithValue("@ModelType", modelParameters.ModelType);
+                cmd.Parameters.AddWithValue("@MakeTypeId", modelParameters.MakeTypeId);
+                cmd.Parameters.AddWithValue("@UserId", modelParameters.UserId);
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+
+                modelParameters.MakeTypeId = (int)param.Value;
+
+            }
+        }
+
+        public List<AddModelDetail> GetModelDetails()
+        {
+            List<AddModelDetail> addMakeDetails = new List<AddModelDetail>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("GetModelTypeDetails", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        AddModelDetail row = new AddModelDetail();
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.DateAdded = (DateTime)dr["DateAdded"];
+                        row.Email = dr["Email"].ToString();
+
+                        addMakeDetails.Add(row);
+                    }
+                }
+            }
+
+            return addMakeDetails;
+        }
+
+        public List<VehicleShortItem> GetFeaturedVehicles()
+        {
+            List<VehicleShortItem> featuredVehicles = new List<VehicleShortItem>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("GetFeaturedVehicles", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        VehicleShortItem row = new VehicleShortItem();
+                        row.VinNumber = dr["VinNumber"].ToString();
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.ImageFileName = dr["ImageFileName"].ToString();
+                        row.SalePrice = (decimal)dr["SalePrice"];
+                        row.Year = (int)dr["Year"];
+
+                        featuredVehicles.Add(row);
+                    }
+                }
+            }
+
+            return featuredVehicles;
+        }
+
+        public void AddSpeccial(Special special)
+        {
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("SpecialInsert", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter param = new SqlParameter("@SpecialId", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add(param);
+
+                cmd.Parameters.AddWithValue("@Title", special.Title);
+                cmd.Parameters.AddWithValue("@UserId", special.UserId);
+                cmd.Parameters.AddWithValue("@SpecialDescription", special.SpecialDescription);
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+
+                special.SpecialId = (int)param.Value;
+
+            }
+        }
+
+        public List<Special> GetSpecials()
+        {
+            List<Special> specials = new List<Special>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("GetSpecials", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Special row = new Special();
+                        row.Title = dr["Title"].ToString();
+                        row.SpecialDescription = dr["SpecialDescription"].ToString();
+
+                        specials.Add(row);
+                    }
+                }
+            }
+
+            return specials;
+        }
     }
 }

@@ -44,20 +44,20 @@
   <ItemGroup>
     <Compile Include="ColorsAndStylesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesRepository.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="StatesRepository.cs" />
     <Compile Include="TypesRepository.cs" />
     <Compile Include="VehicleInventoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\source\repos\GuildCars\GuildCars.UI\GuildCars.UI.csproj">
-      <Project>{127096b5-6453-4715-98ac-2a528421ad7d}</Project>
-      <Name>GuildCars.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GuildCars.Models\GuildCars.Models.csproj">
       <Project>{1fedc029-b310-417a-acdb-57bed0814790}</Project>
       <Name>GuildCars.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

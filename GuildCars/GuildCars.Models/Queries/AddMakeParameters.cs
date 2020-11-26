@@ -8,6 +8,7 @@ namespace GuildCars.Models.Queries
 {
     public class AddMakeParameters
     {
+        public int MakeTypeId { get; set; }
         public string MakeType { get; set; }
         public string UserId { get; set; }
     }
