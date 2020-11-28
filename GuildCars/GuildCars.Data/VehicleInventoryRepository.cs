@@ -30,25 +30,25 @@ namespace GuildCars.Data
                     if (dr.Read())
                     {
                         vehicle = new VehicleInventoryListingDetails();
-                        vehicle.VinNumber = dr["@VinNumber"].ToString();
-                        vehicle.ModelTypeId = (int)dr["@ModelTypeId"];
-                        vehicle.ModelType = dr["@ModelType"].ToString();
-                        vehicle.MakeTypeId = (int)dr["@MakeTypeId"];
-                        vehicle.MakeType = dr["@MakeType"].ToString();
-                        vehicle.BodyStyleId = (int)dr["@BodyStyleId"];
+                        vehicle.VinNumber = dr["VinNumber"].ToString();
+                        vehicle.ModelTypeId = (int)dr["ModelTypeId"];
+                        vehicle.ModelType = dr["ModelType"].ToString();
+                        vehicle.MakeTypeId = (int)dr["MakeTypeId"];
+                        vehicle.MakeType = dr["MakeType"].ToString();
+                        vehicle.BodyStyleId = (int)dr["BodyStyleId"];
                         vehicle.BodyStyle = dr["BodyStyle"].ToString();
-                        vehicle.InteriorColorId = (int)dr["@InteriorColorId"];
+                        vehicle.InteriorColorId = (int)dr["InteriorColorId"];
                         vehicle.InteriorColor = dr["InteriorColor"].ToString();
-                        vehicle.ExteriorColorId = (int)dr["@ExteriorColorId"];
-                        vehicle.ExteriorColor = dr["@ExteriorColor"].ToString();
-                        vehicle.TransmissionTypeId = (int)dr["@TransmissionTypeId"];
-                        vehicle.TransmissionType = dr["@TransmissionType"].ToString();
-                        vehicle.ImageFileName = dr["@ImageFileName"].ToString();
-                        vehicle.MSRP = (decimal)dr["@MSRP"];
-                        vehicle.Mileage = (int)dr["@Mileage"];
-                        vehicle.SalePrice = (decimal)dr["@SalePrice"];
-                        vehicle.Year = (int)dr["@Year"];
-                        vehicle.VehicleDescription = dr["@VehicleDescription"].ToString();
+                        vehicle.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        vehicle.ExteriorColor = dr["ExteriorColor"].ToString();
+                        vehicle.TransmissionTypeId = (int)dr["TransmissionTypeId"];
+                        vehicle.TransmissionType = dr["TransmissionType"].ToString();
+                        vehicle.ImageFileName = dr["ImageFileName"].ToString();
+                        vehicle.MSRP = (decimal)dr["MSRP"];
+                        vehicle.Mileage = (int)dr["Mileage"];
+                        vehicle.SalePrice = (decimal)dr["SalePrice"];
+                        vehicle.Year = (int)dr["Year"];
+                        vehicle.VehicleDescription = dr["VehicleDescription"].ToString();
 
                     }
                 }
