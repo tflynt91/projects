@@ -8,7 +8,7 @@ namespace GuildCars.Models.Queries
 {
     public class VehicleInventorySearchParameters
     {
-        public string MakeModelOrYearInput { get; set; }
+        public string MakeModelYearInput { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
         public int? MinYear { get; set; }

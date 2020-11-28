@@ -120,16 +120,16 @@ namespace GuildCars.Data
                     cmd.Parameters.AddWithValue("@MaxYear", parameters.MaxYear);
                 }
 
-                if (Int32.TryParse(parameters.MakeModelOrYearInput, out int year))
+                if (Int32.TryParse(parameters.MakeModelYearInput, out int year))
                 {
                     query += "AND v.Year = @Year ";
                     cmd.Parameters.AddWithValue("@Year", year);
                 }
 
-                else if (!string.IsNullOrEmpty(parameters.MakeModelOrYearInput))
+                else if (!string.IsNullOrEmpty(parameters.MakeModelYearInput))
                 {
                     query += "AND mo.ModelType OR mk.MakeType LIKE @MakeModelOrYearInput";
-                    cmd.Parameters.AddWithValue("@MakeModelOrYearInput", parameters.MakeModelOrYearInput);
+                    cmd.Parameters.AddWithValue("@MakeModelOrYearInput", parameters.MakeModelYearInput);
                 }
 
                 
@@ -206,16 +206,16 @@ namespace GuildCars.Data
                     cmd.Parameters.AddWithValue("@MaxYear", parameters.MaxYear);
                 }
 
-                if (Int32.TryParse(parameters.MakeModelOrYearInput, out int year))
+                if (Int32.TryParse(parameters.MakeModelYearInput, out int year))
                 {
                     query += "AND v.Year = @Year ";
                     cmd.Parameters.AddWithValue("@Year", year);
                 }
 
-                else if (!string.IsNullOrEmpty(parameters.MakeModelOrYearInput))
+                else if (!string.IsNullOrEmpty(parameters.MakeModelYearInput))
                 {
                     query += "AND mo.ModelType OR mk.MakeType LIKE @MakeModelOrYearInput";
-                    cmd.Parameters.AddWithValue("@MakeModelOrYearInput", parameters.MakeModelOrYearInput);
+                    cmd.Parameters.AddWithValue("@MakeModelOrYearInput", parameters.MakeModelYearInput);
                 }
 
 
