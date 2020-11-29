@@ -66,6 +66,8 @@
     <Compile Include="Tables\TransmissionType.cs" />
     <Compile Include="Tables\Vehicle.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="GuildCars.sln" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
