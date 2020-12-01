@@ -44,5 +44,22 @@ namespace GuildCarsMax.UI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Route("api/Inventory/sales/search")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult SalesInventorySearch(VehicleInventorySearchParameters parameters)
+        {
+            var repo = new VehicleInventoryRepository();
+
+            try
+            {
+                var results = repo.SalesInventorySearch(parameters);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

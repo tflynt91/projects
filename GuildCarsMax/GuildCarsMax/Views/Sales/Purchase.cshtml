@@ -1,0 +1,40 @@
+﻿@model GuildCarsMax.Models.PurchaseVehicleViewModel
+
+@{
+    ViewBag.Title = "Purchase";
+}
+
+<div class="row">
+    <h2>Purchase Vehicle</h2>
+</div>
+
+<div class="col-12">
+    <div class="row col-12"><p class="searchListItem"><strong>@Model.Vehicle.Year  @Model.Vehicle.MakeType @Model.Vehicle.ModelType </strong></p></div>
+    <div class="row">
+        <p class="searchListItem col-sm-3"><img src="@Url.Content("~/Images/" + Model.Vehicle.ImageFileName)" /></p>
+        <p class="searchListItem col-sm-3">
+            <strong>Body Style: </strong>@Model.Vehicle.BodyStyle
+            <br /><strong>Trans: </strong>@Model.Vehicle.TransmissionType
+            <br /><strong>Color: </strong>@Model.Vehicle.ExteriorColor
+        </p>
+        <p class="searchListItem col-sm-3">
+            <strong>Interior: </strong>@Model.Vehicle.InteriorColor
+            <br /><strong>Mileage: </strong>@Model.Vehicle.Mileage
+            <br /><strong>VIN #: </strong>@Model.Vehicle.VinNumber
+        </p>
+        <p class="searchListItem col-sm-3">
+            <strong>Sale Price: </strong>@Model.Vehicle.SalePrice
+            <br /><strong>MSRP: </strong>@Model.Vehicle.MSRP
+        </p>
+    </div>
+    <div class="row">
+        <p class="vehicleDetail col-sm-9">
+            <strong>Description: </strong>@Model.Vehicle.VehicleDescription
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <h2>Sales Information</h2>
+</div>
+

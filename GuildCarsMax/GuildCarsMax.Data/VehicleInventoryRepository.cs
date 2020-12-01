@@ -258,6 +258,92 @@ namespace GuildCarsMax.Data
             return inventoryResults;
         }
 
+        public List<VehicleInventoryListingDetails> SalesInventorySearch(VehicleInventorySearchParameters parameters)
+        {
+            List<VehicleInventoryListingDetails> inventoryResults = new List<VehicleInventoryListingDetails>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles v INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE 1 = 1 AND ";
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+
+                if (parameters.MinPrice.HasValue)
+                {
+                    query += "AND v.SalePrice >= @MinPrice ";
+                    cmd.Parameters.AddWithValue("@MinPrice", parameters.MinPrice.Value);
+                }
+
+                if (parameters.MaxPrice.HasValue)
+                {
+                    query += "AND v.SalePrice <= @MaxPrice ";
+                    cmd.Parameters.AddWithValue("@MaxPrice", parameters.MaxPrice.Value);
+                }
+
+                if (parameters.MinYear.HasValue)
+                {
+                    query += "AND v.Year >= @MinYear ";
+                    cmd.Parameters.AddWithValue("@MinYear", parameters.MinYear);
+                }
+
+                if (parameters.MaxYear.HasValue)
+                {
+                    query += "AND v.Year <= @MaxYear ";
+                    cmd.Parameters.AddWithValue("@MaxYear", parameters.MaxYear);
+                }
+
+                if (Int32.TryParse(parameters.MakeModelYearInput, out int year))
+                {
+                    query += "AND v.Year = @Year ";
+                    cmd.Parameters.AddWithValue("@Year", year);
+                }
+
+                else if (!string.IsNullOrEmpty(parameters.MakeModelYearInput))
+                {
+                    query += "AND mo.ModelType OR mk.MakeType LIKE @MakeModelOrYearInput";
+                    cmd.Parameters.AddWithValue("@MakeModelOrYearInput", parameters.MakeModelYearInput);
+                }
+
+
+                query += "ORDER BY v.MSRP DESC";
+                cmd.CommandText = query;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        VehicleInventoryListingDetails row = new VehicleInventoryListingDetails();
+
+                        row.VinNumber = dr["VinNumber"].ToString();
+                        row.ModelTypeId = (int)dr["ModelTypeId"];
+                        row.ModelType = dr["ModelType"].ToString();
+                        row.MakeTypeId = (int)dr["MakeTypeId"];
+                        row.MakeType = dr["MakeType"].ToString();
+                        row.BodyStyleId = (int)dr["BodyStyleId"];
+                        row.BodyStyle = dr["BodyStyle"].ToString();
+                        row.InteriorColorId = (int)dr["InteriorColorId"];
+                        row.InteriorColor = dr["InteriorColor"].ToString();
+                        row.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        row.ExteriorColor = dr["ExteriorColor"].ToString();
+                        row.TransmissionTypeId = (int)dr["TransmissionTypeId"];
+                        row.TransmissionType = dr["TransmissionType"].ToString();
+                        row.ImageFileName = dr["ImageFileName"].ToString();
+                        row.MSRP = (decimal)dr["MSRP"];
+                        row.Mileage = (int)dr["Mileage"];
+                        row.SalePrice = (decimal)dr["SalePrice"];
+                        row.Year = (int)dr["Year"];
+                        row.VehicleDescription = dr["VehicleDescription"].ToString();
+
+                        inventoryResults.Add(row);
+                    }
+                }
+            }
+
+            return inventoryResults;
+        }
+
         public void Update(Vehicle updatedVehicle)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))

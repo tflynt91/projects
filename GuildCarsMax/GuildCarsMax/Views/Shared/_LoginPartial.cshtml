@@ -1,8 +1,26 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        
-}
+    <li class="nav-item">
+        <a class="nav-item nav-link" href="#">@Html.ActionLink("Sales", "Index", "Sales")</a>
+    </li>
+        if (User.IsInRole("admin"))
+        {
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">@Html.ActionLink("Vehicles", "Vehicles", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Add Vehicle", "AddVehicle", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Makes", "AddMake", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Models", "AddModel", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Specials", "AddSpecial", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Users", "Users", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Reports", "Index", "Reports")</a>
+        </div>
+    </li>
+    }
+
+    }
 

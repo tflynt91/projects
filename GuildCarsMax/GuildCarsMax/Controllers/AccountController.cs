@@ -10,6 +10,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GuildCarsMax.UI.Models;
 using GuildCarsMax.Models;
+using System.Data.Entity.Core.EntityClient;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Ajax.Utilities;
+using System.Web.Security;
 
 namespace GuildCarsMax.UI.Controllers
 {
@@ -18,6 +22,7 @@ namespace GuildCarsMax.UI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        
 
         public AccountController()
         {
@@ -140,7 +145,13 @@ namespace GuildCarsMax.UI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var context = new ApplicationDbContext();
+            var roles = context.Roles.ToList();
+            RegisterViewModel model = new RegisterViewModel
+            {
+                RoleList = new SelectList(roles, "Name", "Name")
+            };
+            return View(model);
         }
 
         //
@@ -150,27 +161,45 @@ namespace GuildCarsMax.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            using (var context = new ApplicationDbContext())
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+
+                if (ModelState.IsValid)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
 
-                    return RedirectToAction("Index", "Home");
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    var roleStore = new RoleStore<IdentityRole>(context);
+
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRole(user.Id, model.Role.ToString());
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
-            }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                var roles = context.Roles.ToList();
+                RegisterViewModel newModel = new RegisterViewModel
+                {   FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    RoleList = new SelectList(roles, "Name", "Name")
+                };
+                // If we got this far, something failed, redisplay form
+                return View(newModel);
+            }
         }
 
         //

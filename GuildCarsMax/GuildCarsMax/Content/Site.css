@@ -45,3 +45,7 @@ textarea {
 #navIcon {
     font-size: 2em;
 }
+
+#registerDropDown {
+    text-transform: capitalize;
+}
