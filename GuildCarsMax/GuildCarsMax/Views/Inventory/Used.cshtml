@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "Used";
+}
+
+<div class="row">
+    <h2>Used Vehicles</h2>
+</div>
+
+<div class="row">
+    <form id="searchForm" class="form-inline">
+        <label class="sr-only" for="makeModelYear">Make Model or Year</label>
+        <input type="text" class="form-control mb-2 mr-sm-4" id="makeModelYear" placeholder="Enter make, model, or year">
+
+        <label for="minPrice">Price: </label>
+        <select id="minPrice" class="form-control mb-2 mr-sm-2">
+            <option selected>No Min</option>
+            <option>5000</option>
+            <option>6000</option>
+            <option>7000</option>
+            <option>8000</option>
+            <option>9000</option>
+            <option>10000</option>
+            <option>11000</option>
+            <option>12000</option>
+            <option>13000</option>
+            <option>14000</option>
+            <option>15000</option>
+            <option>16000</option>
+            <option>17000</option>
+            <option>18000</option>
+            <option>19000</option>
+            <option>20000</option>
+        </select>
+        <select id="maxPrice" class="form-control mb-2 mr-sm-2">
+            <option selected>No Max</option>
+            <option>5000</option>
+            <option>6000</option>
+            <option>7000</option>
+            <option>8000</option>
+            <option>9000</option>
+            <option>10000</option>
+            <option>11000</option>
+            <option>12000</option>
+            <option>13000</option>
+            <option>14000</option>
+            <option>15000</option>
+            <option>16000</option>
+            <option>17000</option>
+            <option>18000</option>
+            <option>19000</option>
+            <option>20000</option>
+        </select>
+        <label for="minYear">Year: </label>
+        <select id="minYear" class="form-control mb-2 mr-sm-2">
+            <option selected>No Min</option>
+            <option>2005</option>
+            <option>2006</option>
+            <option>2007</option>
+            <option>2008</option>
+            <option>2009</option>
+            <option>2010</option>
+            <option>2011</option>
+            <option>2012</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+        </select>
+        <select id="maxYear" class="form-control mb-2 mr-sm-2">
+            <option selected>No Max</option>
+            <option>2005</option>
+            <option>2006</option>
+            <option>2007</option>
+            <option>2008</option>
+            <option>2009</option>
+            <option>2010</option>
+            <option>2011</option>
+            <option>2012</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+        </select>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+</div>
+
+<div>
+    <div id="searchResults" class="col-xs-12">
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+                return false;
+            });
+        });
+
+        function search() {
+
+            var imagePath = '@Url.Content("~/Images/")';
+            var detailsPath = '@Url.Action("Details", "Inventory")/';
+
+            $.ajax({
+                type: 'POST',
+                url: 'https://localhost:44349/api/Inventory/used/search',
+                data: JSON.stringify({
+                    makeModelYearInput: $('#makeModelYear').val(),
+                    minPrice: $('#minPrice :selected').text(),
+                    maxPrice: $('#maxPrice :selected').text(),
+                    minYear: $('#minYear :selected').text(),
+                    maxYear: $('#maxYear :selected').text()
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'dataType': 'json',
+                success: function (results) {
+                    $('#searchResults').empty();
+                    $.each(results, function (index, vehicle) {
+                        var html = '<div class="col-12">' +
+                            '<div class="row col-12"><p class="searchListItem"><strong>' + vehicle.Year + ' ' + vehicle.MakeType + ' ' + vehicle.ModelType + '</strong></p></div>' +
+                            '<div class="row"><p class="searchListItem col-sm-3"><img src="' + imagePath + vehicle.ImageFileName + '" /></p>' +
+                            '<p class="searchListItem col-sm-3"><strong>Body Style: </strong>' + vehicle.BodyStyle +
+                            '<br /><strong>Trans: </strong>' + vehicle.TransmissionType +
+                            '<br /><strong>Color: </strong>' + vehicle.ExteriorColor + '</p>' +
+                            '<p class="searchListItem col-sm-3"><strong>Interior: </strong>' + vehicle.InteriorColor +
+                            '<br /><strong>Mileage: </strong>' + vehicle.Mileage +
+                            '<br /><strong>VIN #: </strong>' + vehicle.VinNumber + '</p>' +
+                            '<p class="searchListItem col-sm-3"><strong>Sale Price: </strong>' + vehicle.SalePrice +
+                            '<br /><strong>MSRP: </strong>' + vehicle.MSRP +
+                            '<br /><button id="btnDetails" class="btn btn-default" onclick="window.location.href=\'/Inventory/Details?vinNumber=' + vehicle.VinNumber + '\'">Details</button></p></div>'
+                        $('#searchResults').append(html);
+                    });
+                },
+                error: function () {
+                    alert('Error performaing search, try again later!')
+                }
+            });
+        }
+    </script>
+}
+

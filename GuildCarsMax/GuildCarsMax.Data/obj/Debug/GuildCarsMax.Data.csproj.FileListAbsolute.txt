@@ -1,0 +1,9 @@
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\obj\Debug\GuildCarsMax.Data.csprojAssemblyReference.cache
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\obj\Debug\GuildCarsMax.Data.csproj.CoreCompileInputs.cache
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\bin\Debug\GuildCarsMax.Data.dll
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\bin\Debug\GuildCarsMax.Data.pdb
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\bin\Debug\GuildCarsMax.Models.dll
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\bin\Debug\GuildCarsMax.Models.pdb
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\obj\Debug\GuildCarsMax.Data.csproj.CopyComplete
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\obj\Debug\GuildCarsMax.Data.dll
+C:\Users\flynt\Documents\GitHub\projects\GuildCarsMax\GuildCarsMax.Data\obj\Debug\GuildCarsMax.Data.pdb

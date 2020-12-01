@@ -1,0 +1,79 @@
+﻿@model GuildCarsMax.Models.Tables.Contact
+@{
+    ViewBag.Title = "AddContact";
+}
+<div class="row">
+    <h2>Contact</h2>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        @using (Html.BeginForm("AddContact", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddContact" }))
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label>Name</label>
+                @Html.TextBoxFor(m => m.Name, new { @class= "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                @Html.TextBoxFor(m => m.Email, new { @class= "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        }
+    </div>
+    <div class="col-sm-6">
+        <iframe width="300"
+                height="300"
+                frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKRh9BpPGj-38xMryfq512FCLpk_9yO3g
+                 &q=182+Lake+St,Hamburg,+NY+14075" allowfullscreen>
+        </iframe>
+        <div class="col-sm-6">
+            <p>182 Lake St
+            <br />Hamburg, NY 14075</p>
+
+            <p>Sales: 716-649-3535
+            <br />Service: 716-649-3545</p>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#frmAddContact').validate({
+                rules: {
+                    'Name': {
+                        required: true
+                    },
+                    'Email': {
+                        required: function (element) {
+                            return $('Phone').is(' :empty');
+                        }
+                    },
+                    'Phone': {
+                        required: function (element) {
+                            return $('Email').is(' :empty');
+                        }
+                    },
+                    'Message': {
+                        required: true
+                    }
+                }                                        
+                
+            });
+        })
+    </script>
+}
+
+

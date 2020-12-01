@@ -1,0 +1,24 @@
+﻿@model IEnumerable<GuildCarsMax.Models.Tables.Special>
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<div class="row">
+    <h2>Specials</h2>
+</div>
+<div class="col-12">
+    @foreach (var special in Model)
+    {
+        <div class="row">
+            <div class="col-sm-1">
+                <i id="specialIcon" class="material-icons">attach_money</i>
+            </div>
+            <div class="col-sm-11">
+                <h6>@special.Title</h6>
+                <p>@special.SpecialDescription</p>
+            </div>
+        </div>
+    }
+</div>
+
