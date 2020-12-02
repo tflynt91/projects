@@ -1,4 +1,5 @@
 ﻿@model GuildCarsMax.Models.PurchaseVehicleViewModel
+    @using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Purchase";
@@ -36,5 +37,74 @@
 
 <div class="row">
     <h2>Sales Information</h2>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        @using (Html.BeginForm("Purchase", "Sales", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddContact" }))
+        {
+            @Html.ValidationSummary()
+            @Html.HiddenFor(v => v.Sale.VinNumber, new { Value = Model.Vehicle.VinNumber })
+            @Html.HiddenFor(d => d.Sale.PurchaseDate, new { Value = DateTime.Now })
+            @Html.HiddenFor(u => u.Sale.UserId, new { Value = User.Identity.GetUserId() })
+            @Html.HiddenFor(u => u.Vehicle.SalePrice, new { Value = Model.Vehicle.SalePrice })
+            @Html.HiddenFor(u => u.Vehicle.MSRP, new { Value = Model.Vehicle.MSRP })
+
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Name</label>
+                    @Html.TextBoxFor(m => (m.Name), new { @class = "form-control" })
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Phone</label>
+                    @Html.TextBoxFor(m => m.Sale.Phone, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Email</label>
+                    @Html.TextBoxFor(m => m.Sale.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Street 1</label>
+                    @Html.TextBoxFor(m => m.Sale.Street1, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>Street 2</label>
+                    @Html.TextBoxFor(m => m.Sale.Street2, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>City</label>
+                    @Html.TextBoxFor(m => m.Sale.City, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>State</label>
+                    @Html.DropDownListFor(m => m.Sale.StateId, Model.States, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Zipcode</label>
+                    @Html.TextBoxFor(m => m.Sale.ZipCode, new { @class = "form-control" })
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Purchase Price</label>
+                    @Html.TextBoxFor(m => m.Sale.PurchasePrice, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>Purchase Type</label>
+                    @Html.DropDownListFor(m => m.Sale.PurchaseTypeId, Model.PurchaseTypes, new { @class = "form-control" })
+                </div>
+            </div>
+            <button class="btn btn-primary">Save</button>
+        }
+    </div>
 </div>
 

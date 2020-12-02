@@ -2,7 +2,7 @@
 @if (Request.IsAuthenticated)
 {
     <li class="nav-item">
-        <a class="nav-item nav-link" href="#">@Html.ActionLink("Sales", "Index", "Sales")</a>
+        <a class="nav-link" href="#">@Html.ActionLink("Sales", "Index", "Sales")</a>
     </li>
         if (User.IsInRole("admin"))
         {

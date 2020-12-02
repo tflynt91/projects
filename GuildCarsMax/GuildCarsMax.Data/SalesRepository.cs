@@ -30,10 +30,32 @@ namespace GuildCarsMax.Data
                 cmd.Parameters.AddWithValue("@PurchaseDate", sale.PurchaseDate);
                 cmd.Parameters.AddWithValue("@FirstName", sale.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", sale.LastName);
-                cmd.Parameters.AddWithValue("@Email", sale.Email);
-                cmd.Parameters.AddWithValue("@Phone", sale.Phone);
+                if (string.IsNullOrEmpty(sale.Email))
+                {
+                    cmd.Parameters.AddWithValue("@Email", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Email", sale.Email);
+                }
+
+                if (string.IsNullOrEmpty(sale.Phone))
+                {
+                    cmd.Parameters.AddWithValue("@Phone", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Phone", sale.Phone);
+                }
                 cmd.Parameters.AddWithValue("@Street1", sale.Street1);
-                cmd.Parameters.AddWithValue("@Street2", sale.Street2);
+                if (string.IsNullOrEmpty(sale.Street2))
+                {
+                    cmd.Parameters.AddWithValue("@Street2", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Street2", sale.Street2);
+                }
                 cmd.Parameters.AddWithValue("@City", sale.City);
                 cmd.Parameters.AddWithValue("@StateId", sale.StateId);
                 cmd.Parameters.AddWithValue("@ZipCode", sale.ZipCode);

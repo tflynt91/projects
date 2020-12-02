@@ -45,6 +45,7 @@ namespace GuildCarsMax.UI.Controllers
             }
         }
 
+
         [Route("api/Inventory/sales/search")]
         [AcceptVerbs("POST")]
         public IHttpActionResult SalesInventorySearch(VehicleInventorySearchParameters parameters)

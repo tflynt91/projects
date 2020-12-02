@@ -264,7 +264,7 @@ namespace GuildCarsMax.Data
 
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles v INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE 1 = 1 AND ";
+                string query = "SELECT TOP 20 v.VinNumber, mo.ModelTypeId, mo.ModelType, mk.MakeTypeId, mk.MakeType, b.BodyStyleId, b.BodyStyle, i.InteriorColorId, i.InteriorColor, e.ExteriorColorId, e.ExteriorColor, t.TransmissionTypeId, t.TransmissionType, v.ImageFileName, v.MSRP, v.Mileage, v.SalePrice, v.Year, v.VehicleDescription FROM Vehicles v INNER JOIN ModelTypes mo ON v.ModelTypeId = mo.ModelTypeId INNER JOIN MakeTypes mk ON mk.MakeTypeId = mo.MakeTypeId INNER JOIN BodyStyles b ON v.BodyStyleId = b.BodyStyleId INNER JOIN  InteriorColors i ON v.InteriorColorId = i.InteriorColorId INNER JOIN ExteriorColors e ON v.ExteriorColorId = e.ExteriorColorId INNER JOIN TransmissionTypes t ON v.TransmissionTypeId = t.TransmissionTypeId WHERE 1 = 1 ";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
 
@@ -364,7 +364,7 @@ namespace GuildCarsMax.Data
                 cmd.Parameters.AddWithValue("@SalePrice", updatedVehicle.SalePrice);
                 cmd.Parameters.AddWithValue("@Year", updatedVehicle.Year);
                 cmd.Parameters.AddWithValue("@VehicleDescription", updatedVehicle.VehicleDescription);
-                cmd.Parameters.AddWithValue("@Sold", false);
+                cmd.Parameters.AddWithValue("@Sold", updatedVehicle.Sold);
                 cmd.Parameters.AddWithValue("@Featured", updatedVehicle.Featured);
 
                 cn.Open();
@@ -639,6 +639,47 @@ namespace GuildCarsMax.Data
             }
 
             return specials;
+        }
+
+        public Vehicle GetVehicle(string vinNumber)
+        {
+            Vehicle vehicle = null;
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("GetVehicle", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@VinNumber", vinNumber);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        vehicle = new Vehicle();
+                        vehicle.VinNumber = dr["VinNumber"].ToString();
+                        vehicle.ModelTypeId = (int)dr["ModelTypeId"];
+                        vehicle.BodyStyleId = (int)dr["BodyStyleId"];
+                        vehicle.InteriorColorId = (int)dr["InteriorColorId"];
+                        vehicle.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        vehicle.TransmissionTypeId = (int)dr["TransmissionTypeId"];
+                        vehicle.NewOrUsedTypeId = (int)dr["NewOrUsedTypeId"];
+                        vehicle.ImageFileName = dr["ImageFileName"].ToString();
+                        vehicle.MSRP = (decimal)dr["MSRP"];
+                        vehicle.Mileage = (int)dr["Mileage"];
+                        vehicle.SalePrice = (decimal)dr["SalePrice"];
+                        vehicle.Year = (int)dr["Year"];
+                        vehicle.VehicleDescription = dr["VehicleDescription"].ToString();
+                        vehicle.Sold = Convert.ToBoolean(dr["Sold"]);
+                        vehicle.Featured = Convert.ToBoolean(dr["Feautured"]);
+
+                    }
+                }
+            }
+
+            return vehicle;
         }
     }
 }
