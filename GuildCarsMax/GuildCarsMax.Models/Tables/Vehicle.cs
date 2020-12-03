@@ -10,6 +10,7 @@ namespace GuildCarsMax.Models.Tables
     public class Vehicle
     {
         public string VinNumber { get; set; }
+        public int MakeTypeId { get; set; }
         public int ModelTypeId { get; set; }
         public int BodyStyleId { get; set; }
         public int InteriorColorId { get; set; }

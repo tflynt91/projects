@@ -62,5 +62,32 @@ namespace GuildCarsMax.UI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Route("api/Inventory/getModels")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetMakes(int makeId)
+        {
+            var repo = new TypesRepository();
+
+            try
+            {
+                var results = repo.GetAllModelTypesByMake(makeId);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("api/Inventory/deleteVehicle")]
+        [AcceptVerbs("DELETE")]
+        public void DeleteVehicle(string vinNumber)
+        {
+            var repo = new VehicleInventoryRepository();
+
+            repo.Delete(vinNumber);
+
+        }
     }
 }

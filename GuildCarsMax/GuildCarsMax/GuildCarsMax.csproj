@@ -202,10 +202,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddVehicleViewModel.cs" />
+    <Compile Include="Models\EditVehicleViewModel.cs" />
     <Compile Include="Models\PurchaseVehicleViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -376,6 +378,8 @@
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Sales\Purchase.cshtml" />
     <Content Include="Views\Admin\Vehicles.cshtml" />
+    <Content Include="Views\Admin\AddVehicle.cshtml" />
+    <Content Include="Views\Admin\EditVehicle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

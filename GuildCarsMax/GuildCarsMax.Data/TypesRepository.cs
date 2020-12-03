@@ -11,7 +11,7 @@ namespace GuildCarsMax.Data
 {
     public class TypesRepository
     {
-        public List<MakeType> GetAllMakeTypes()
+        public IEnumerable<MakeType> GetAllMakeTypes()
         {
             List<MakeType> makeTypes = new List<MakeType>();
 
@@ -38,7 +38,7 @@ namespace GuildCarsMax.Data
             return makeTypes;
         }
 
-        public List<ModelType> GetAllModelTypesByMake(MakeType makeType)
+        public IEnumerable<ModelType> GetAllModelTypesByMake(int makeTypeId)
         {
             List<ModelType> modelTypes = new List<ModelType>();
 
@@ -47,7 +47,7 @@ namespace GuildCarsMax.Data
                 SqlCommand cmd = new SqlCommand("SelectModelTypesByMake", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@MakeTypeId", makeType.MakeTypeId);
+                cmd.Parameters.AddWithValue("@MakeTypeId", makeTypeId);
 
                 cn.Open();
 
@@ -67,7 +67,7 @@ namespace GuildCarsMax.Data
             return modelTypes;
         }
 
-        public List<NewOrUsedType> GetNewOrUsedTypeOptions()
+        public IEnumerable<NewOrUsedType> GetNewOrUsedTypeOptions()
         {
             List<NewOrUsedType> newOrUsedTypes = new List<NewOrUsedType>();
 
@@ -94,7 +94,7 @@ namespace GuildCarsMax.Data
             return newOrUsedTypes;
         }
 
-        public List<PurchaseType> GetAllPurchaseTypes()
+        public IEnumerable<PurchaseType> GetAllPurchaseTypes()
         {
             List<PurchaseType> purchaseTypes = new List<PurchaseType>();
 
@@ -121,7 +121,7 @@ namespace GuildCarsMax.Data
             return purchaseTypes;
         }
 
-        public List<TransmissionType> GetAllTransmissionTypes()
+        public IEnumerable<TransmissionType> GetAllTransmissionTypes()
         {
             List<TransmissionType> transmissionTypes = new List<TransmissionType>();
 
@@ -137,8 +137,8 @@ namespace GuildCarsMax.Data
                     while (dr.Read())
                     {
                         TransmissionType currentRow = new TransmissionType();
-                        currentRow.TransmissionTypeId = (int)dr["PurchaseTypeId"];
-                        currentRow.TransmissionTypeName = dr["PurchaseType"].ToString();
+                        currentRow.TransmissionTypeId = (int)dr["TransmissionTypeId"];
+                        currentRow.TransmissionTypeName = dr["TransmissionType"].ToString();
 
                         transmissionTypes.Add(currentRow);
                     }
@@ -146,6 +146,87 @@ namespace GuildCarsMax.Data
             }
 
             return transmissionTypes;
+        }
+
+        public IEnumerable<ExteriorColor> GetAllExteriorColors()
+        {
+            List<ExteriorColor> exteriorColors = new List<ExteriorColor>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("ExteriorColorsSelectAll", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ExteriorColor currentRow = new ExteriorColor();
+                        currentRow.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        currentRow.ExteriorColorName = dr["ExteriorColor"].ToString();
+
+                        exteriorColors.Add(currentRow);
+                    }
+                }
+            }
+
+            return exteriorColors;
+        }
+
+        public IEnumerable<InteriorColor> GetAllInteriorColors()
+        {
+            List<InteriorColor> interiorColors = new List<InteriorColor>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("InteriorColorsSelectAll", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        InteriorColor currentRow = new InteriorColor();
+                        currentRow.InteriorColorId = (int)dr["InteriorColorId"];
+                        currentRow.InteriorColorName = dr["InteriorColor"].ToString();
+
+                        interiorColors.Add(currentRow);
+                    }
+                }
+            }
+
+            return interiorColors;
+        }
+
+        public IEnumerable<BodyStyle> GetAllBodyStyles()
+        {
+            List<BodyStyle> bodyStyles = new List<BodyStyle>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("BodyStylesSelectAll", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        BodyStyle currentRow = new BodyStyle();
+                        currentRow.BodyStyleId = (int)dr["BodyStyleId"];
+                        currentRow.BodyStyleName = dr["BodyStyle"].ToString();
+
+                        bodyStyles.Add(currentRow);
+                    }
+                }
+            }
+
+            return bodyStyles;
         }
     }
 }
