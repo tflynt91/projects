@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tables\BodyStyle.cs" />
+    <Compile Include="Tables\UserShortItem.cs" />
     <Compile Include="Tables\Contact.cs" />
     <Compile Include="Tables\ExteriorColor.cs" />
     <Compile Include="Tables\InteriorColor.cs" />

@@ -1,0 +1,90 @@
+﻿@model GuildCarsMax.Models.SalesReportViewModel
+
+@{
+    ViewBag.Title = "SalesReport";
+}
+<div class="row">
+    <h2>Sales Report</h2>
+</div>
+<div class="row">
+    <div class="col-12">
+        <h6>Filters</h6>
+        <form method="post" id="salesSearch">
+            <div class="row">
+                <label for="@Model.FilterParameters.UserId" class="col-form-label">Users</label>
+                @Html.DropDownListFor(m => m.FilterParameters.UserId, Model.Users, "- All -", new { @class = "form-control col-sm-2", @id="userId" })
+                <label for="@Model.FilterParameters.FromDate" class="col-form-label">From Date</label>
+                @Html.TextBoxFor(m => m.FilterParameters.FromDate, new { @class = "form-control col-sm-3", @id="fromDate" })
+                <label for="@Model.FilterParameters.ToDate" class="col-form-label">To Date</label>
+                @Html.TextBoxFor(m => m.FilterParameters.ToDate, new { @class = "form-control col-sm-3", @id="toDate" })
+            </div>
+            <div class="row">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <h6>Sales Results</h6>
+</div>
+<div class="col-sm-6">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    User
+                </th>
+                <th>
+                    Total Sales
+                </th>
+                <th>
+                    Total Vehicles
+                </th>
+            </tr>
+        </thead>
+        <tbody id="searchResults">
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#salesSearch").submit(function (e) {
+                salesSearch();
+                return false;
+            });
+        });
+
+        function salesSearch() {
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'https://localhost:44349/api/Inventory/sales/report',
+                data: JSON.stringify({
+                    userId: $('#userId :selected').text(),
+                    fromDate: $('#fromDate').val(),
+                    toDate: $('#toDate').val()
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'dataType': 'json',
+                success: function (results) {
+                    $('#searchResults').empty();
+                    $.each(results, function (index, user) {
+                        var html = '<td>' + user.User + '</td><td>' + user.TotalSales + '</td><td>' + user.TotalVehicles + '</td><td>'                           
+                        $('#searchResults').append(html);
+                    });
+                },
+                error: function () {
+                    alert('Error performaing search, try again later!')
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@model GuildCarsMax.Models.AddMakeViewModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "AddMake";
+}
+
+<div class="row">
+    <h2>Add Make</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("AddMake", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddContact" }))
+        {
+
+            @Html.ValidationSummary()
+            <div class="row">
+                <div class="form-group col-sm-8">
+                    <label>New Make</label>
+                    @Html.TextBoxFor(m => m.MakeParameters.MakeType, new { @class = "form-control" })
+                    @Html.HiddenFor(m => m.MakeParameters.UserId, new { Value = User.Identity.GetUserId() })
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Date Added</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var make in Model.Makes)
+                {
+                    <tr>
+                        <td>@make.MakeType</td>
+                        <td>@make.DateAdded.ToShortDateString()</td>
+                        <td>@make.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

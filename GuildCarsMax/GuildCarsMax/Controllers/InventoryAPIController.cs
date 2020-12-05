@@ -89,5 +89,32 @@ namespace GuildCarsMax.UI.Controllers
             repo.Delete(vinNumber);
 
         }
+
+        [Route("api/Inventory/deleteSpecial")]
+        [AcceptVerbs("DELETE")]
+        public void DeleteVehicle(int specialId)
+        {
+            var repo = new VehicleInventoryRepository();
+
+            repo.DeleteSpecial(specialId);
+
+        }
+
+        [Route("api/Inventory/sales/report")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult SalesReport(SalesReportFilterParameters parameters)
+        {
+            var repo = new SalesRepository();
+
+            try
+            {
+                var results = repo.SalesReportSearch(parameters);
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

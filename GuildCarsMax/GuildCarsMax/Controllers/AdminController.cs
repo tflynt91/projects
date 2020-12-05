@@ -1,10 +1,16 @@
 ﻿using GuildCarsMax.Data;
 using GuildCarsMax.Models;
+using GuildCarsMax.Models.Queries;
 using GuildCarsMax.Models.Tables;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations.Model;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
@@ -13,12 +19,13 @@ namespace GuildCarsMax.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        [Authorize(Roles = "admin")]
         public ActionResult Vehicles()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult AddVehicle()
         {
             var model = new AddVehicleViewModel();
@@ -36,6 +43,7 @@ namespace GuildCarsMax.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddVehicle(AddVehicleViewModel model)
         {
@@ -90,6 +98,7 @@ namespace GuildCarsMax.Controllers
             
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult EditVehicle(string vinNumber)
         {
             var model = new EditVehicleViewModel();
@@ -108,6 +117,7 @@ namespace GuildCarsMax.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditVehicle(AddVehicleViewModel model)
         {
@@ -174,6 +184,199 @@ namespace GuildCarsMax.Controllers
 
         }
 
-        
+        [Authorize(Roles = "admin")]
+        public ActionResult Users()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                List<UserViewModel> userVM = new List<UserViewModel>();
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                List<ApplicationUser> allUsers = userStore.Users.ToList();
+                foreach (var user in allUsers)
+                {
+                    var row = new UserViewModel { UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Role = userManager.GetRoles(user.Id).FirstOrDefault() };
+                    userVM.Add(row);
+                }
+                return View(userVM);
+
+            }
+
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult AddMake()
+        {
+           var repo = new VehicleInventoryRepository();
+           var model = new AddMakeViewModel();
+           var makes = repo.GetMakeDetails();
+           model.Makes = makes;
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult AddMake(AddMakeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var repo = new VehicleInventoryRepository();
+
+                try
+                {
+                    repo.AddMake(model.MakeParameters);
+
+                    return RedirectToAction("AddMake");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                var repo = new VehicleInventoryRepository();
+
+                var makes = repo.GetMakeDetails();
+                model.Makes = makes;
+
+                return View(model);
+            }
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult AddModel()
+        {
+            var repo = new VehicleInventoryRepository();
+            var typesRepo = new TypesRepository();
+            var model = new AddModelViewModel();
+            model.Makes = new SelectList(typesRepo.GetAllMakeTypes(), "MakeTypeId", "MakeTypeName");
+            model.Models = repo.GetModelDetails();
+
+            return View(model);
+
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult AddModel(AddModelViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var repo = new VehicleInventoryRepository();
+
+                try
+                {
+                    repo.AddModel(model.ModelParameters);
+
+                    return RedirectToAction("AddModel");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                var repo = new VehicleInventoryRepository();
+                var typesRepo = new TypesRepository();
+
+                model.Makes = new SelectList(typesRepo.GetAllMakeTypes(), "MakeTypeId", "MakeTypeName");
+                model.Models = repo.GetModelDetails();
+
+                return View(model);
+            }
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult Specials()
+        {
+            var repo = new VehicleInventoryRepository();          
+            var model = new AddSpecialViewModel();
+            model.Specials = repo.GetSpecials();
+
+            return View(model);
+
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult Specials(AddSpecialViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var repo = new VehicleInventoryRepository();
+
+                try
+                {
+                    repo.AddSpecial(model.Special);
+
+                    return RedirectToAction("Specials");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                var repo = new VehicleInventoryRepository();
+                model.Specials = repo.GetSpecials();
+
+                return View(model);
+            }
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult Reports()
+        {
+
+            return View();
+
+        }
+        //.Select(u => new { UserId = u.Id, Name = u.FirstName + " " + u.LastName }).ToList()
+        [Authorize(Roles = "admin")]
+        public ActionResult SalesReport()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var model = new SalesReportViewModel();
+
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                var allUsers = userStore.Users.ToList();
+                List<UserShortItem> salesUsers = new List<UserShortItem>();
+                foreach(var user in allUsers)
+                {
+                    if (userManager.IsInRole(user.Id, "sales"))
+                    {
+                        UserShortItem salesUser = new UserShortItem();
+                        salesUser.UserId = user.Id;
+                        salesUser.Name = $"{user.FirstName} {user.LastName}";
+                        salesUsers.Add(salesUser);
+                        
+                    }
+                }
+                model.FilterParameters = new SalesReportFilterParameters();
+                model.Users = new SelectList(salesUsers, "UserId", "Name");
+
+                return View(model);
+            }
+
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult InventoryReport()
+        {
+            var model = new InventoryReportViewModel();
+            var repo = new VehicleInventoryRepository();
+            model.NewVehicles = repo.NewVehicleInventoryReport();
+            model.UsedVehicles = repo.UsedVehicleInventoryReport();
+
+            return View(model);
+        }
+
     }
 }

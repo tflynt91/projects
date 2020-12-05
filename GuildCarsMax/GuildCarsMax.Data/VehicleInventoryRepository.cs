@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -476,7 +477,7 @@ namespace GuildCarsMax.Data
             }
         }
 
-        public List<AddMakeDetail> GetMakeDetails()
+        public IEnumerable<AddMakeDetail> GetMakeDetails()
         {
             List<AddMakeDetail> addMakeDetails = new List<AddMakeDetail>();
 
@@ -493,7 +494,7 @@ namespace GuildCarsMax.Data
                     {
                         AddMakeDetail row = new AddMakeDetail();
                         row.MakeType = dr["MakeType"].ToString();
-                        row.DateAdded = (DateTime)dr["DateAdded"];
+                        row.DateAdded = ((DateTime)dr["DateAdded"]).Date;
                         row.Email = dr["Email"].ToString();
 
                         addMakeDetails.Add(row);
@@ -589,7 +590,7 @@ namespace GuildCarsMax.Data
             return featuredVehicles;
         }
 
-        public void AddSpeccial(Special special)
+        public void AddSpecial(Special special)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
@@ -630,6 +631,7 @@ namespace GuildCarsMax.Data
                     while (dr.Read())
                     {
                         Special row = new Special();
+                        row.SpecialId = (int)dr["SpecialId"];
                         row.Title = dr["Title"].ToString();
                         row.SpecialDescription = dr["SpecialDescription"].ToString();
 
@@ -639,6 +641,21 @@ namespace GuildCarsMax.Data
             }
 
             return specials;
+        }
+
+        public void DeleteSpecial(int specialId)
+        {
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("SpecialDelete", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@SpecialId", specialId);
+
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public Vehicle GetVehicle(string vinNumber)

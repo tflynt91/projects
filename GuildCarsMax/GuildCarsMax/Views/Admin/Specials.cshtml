@@ -1,0 +1,77 @@
+﻿@model GuildCarsMax.Models.AddSpecialViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<div class="row">
+    <h2>Specials</h2>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("Specials", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddSpecial" }))
+        {
+            @Html.ValidationSummary()
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Title</label>
+                    @Html.TextBoxFor(m => m.Special.Title, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Description</label>
+                    @Html.TextAreaFor(m => m.Special.SpecialDescription, new { @class = "form-control" })
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Special.UserId, new { Value = User.Identity.GetUserId() })
+            <button class="btn btn-primary">Save</button>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @foreach (var special in Model.Specials)
+        {
+        <div class="row">
+            <div class="col-sm-1">
+                <i id="specialIcon" class="material-icons">attach_money</i>
+            </div>
+            <div class="col-sm-11">
+                <div class="row">
+                    <h6>@special.Title</h6>
+                    <input type="hidden" id="@special.SpecialId" name="specialId" value=@special.SpecialId class="special-Id" />
+                    <a class="btn btn-danger deleteSpecial">Delete</a>
+                </div>
+                <div class="row">
+                    <p>@special.SpecialDescription</p>
+                </div>                
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.deleteSpecial').on('click', function () {
+                var result = confirm("Want to delete?");
+                var specialId = $(this).prev('.special-Id').val();
+        if (result) {
+        $.ajax({
+        type: 'DELETE',
+            url: 'https://localhost:44349/api/Inventory/deleteSpecial?specialId=' + specialId,
+        success: function () {
+        window.location.href = '@Url.Action("Specials", "Admin")';
+        }
+        });
+        };
+        });
+        });
+    </script>
+
+}
+

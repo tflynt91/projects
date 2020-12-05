@@ -77,11 +77,11 @@ namespace GuildCarsMax.Data
 
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                string query = "SELECT u.FirstName + u.LastName AS User, SUM(s.PurchasePrice) AS TotalSales, COUNT(s.VinNumber) AS TotalVehicles FROM AspNet.Users u INNER JOIN Sales s ON u.UserId = s.UserId WHERE 1 = 1 ";
+                string query = "SELECT u.FirstName, u.LastName, SUM(s.PurchasePrice) AS TotalSales, COUNT(s.VinNumber) AS TotalVehicles FROM AspNetUsers u INNER JOIN Sales s ON u.Id = s.UserId WHERE 1 = 1 ";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
 
-                if (!parameters.User.Equals("- All -"))
+                if (!parameters.UserId.Equals("- All -"))
                 {
                     query += "AND u.UserId = @UserId ";
                     cmd.Parameters.AddWithValue("@UserId", parameters.UserId);
@@ -106,7 +106,7 @@ namespace GuildCarsMax.Data
                     cmd.Parameters.AddWithValue("@ToDate", parameters.ToDate);
                 }
 
-                query += "GROUP BY u.FirstName + u.LastName AS User";
+                query += "GROUP BY u.FirstName, u.LastName";
 
                 cmd.CommandText = query;
 
@@ -114,11 +114,13 @@ namespace GuildCarsMax.Data
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    while(dr.Read())
+                    if(dr.Read())
                     {
                         SalesReportSearchResult row = new SalesReportSearchResult();
 
-                        row.User = dr["User"].ToString();
+                        string firstName = dr["FirstName"].ToString();
+                        string lastName = dr["LastName"].ToString();
+                        row.User = $"{firstName} {lastName}";
                         row.TotalSales = (decimal)dr["TotalSales"];
                         row.TotalVehicles = (int)dr["TotalVehicles"];
 

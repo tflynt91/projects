@@ -401,7 +401,7 @@ GO
 
 CREATE PROCEDURE GetSpecials AS
 BEGIN
-	SELECT Title, SpecialDescription
+	SELECT SpecialId, Title, SpecialDescription
 	FROM Specials
 END
 GO
@@ -439,4 +439,22 @@ BEGIN
 	WHERE VinNumber = @VinNumber;
 END
 
+GO
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'SpecialDelete')
+      DROP PROCEDURE SpecialDelete
+GO
+
+CREATE PROCEDURE SpecialDelete (
+	@SpecialId int
+) AS
+BEGIN
+	BEGIN TRANSACTION
+
+	DELETE FROM Specials WHERE SpecialId = @SpecialId;
+
+
+	COMMIT TRANSACTION
+END
 GO

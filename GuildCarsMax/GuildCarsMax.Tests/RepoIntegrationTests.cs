@@ -1,10 +1,13 @@
 ﻿using GuildCarsMax.Data;
 using GuildCarsMax.Models.Queries;
 using GuildCarsMax.Models.Tables;
+using GuildGuildCarsMaxCars.Data;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
+using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,11 +32,11 @@ namespace GuildCars.Tests.IntegrationTests
         [Test]
         public void CanLoadColorsAndStyles()
         {
-            var repo = new ColorsAndStylesRepository();
+            var repo = new TypesRepository();
 
-            var exteriorColors = repo.GetAllExteriorColors();
-            var interiorColors = repo.GetAllInteriorColors();
-            var bodyStyles = repo.GetAllBodyStyles();
+            List<ExteriorColor> exteriorColors = repo.GetAllExteriorColors().ToList();
+            List<InteriorColor> interiorColors = repo.GetAllInteriorColors().ToList();
+            List<BodyStyle> bodyStyles = repo.GetAllBodyStyles().ToList();
 
             Assert.AreEqual(7, exteriorColors.Count);
             Assert.AreEqual(1, exteriorColors[0].ExteriorColorId);
@@ -49,13 +52,24 @@ namespace GuildCars.Tests.IntegrationTests
         }
 
         [Test]
+        public void CanLoadMakeTypeDetails()
+        {
+            var repo = new VehicleInventoryRepository();
+            List<AddMakeDetail> makes = repo.GetMakeDetails().ToList();
+
+            Assert.AreEqual(5, makes.Count);
+            Assert.AreEqual((DateTime)2020-12-04, makes[0].DateAdded);
+
+        }
+
+        [Test]
         public void CanLoadMakesAndModels()
         {
             var repo = new TypesRepository();
 
-            var makes = repo.GetAllMakeTypes();
-            var audiModels = repo.GetAllModelTypesByMake(makes[0]);
-            var fordModels = repo.GetAllModelTypesByMake(makes[3]);
+            List<MakeType> makes = repo.GetAllMakeTypes().ToList();
+            List<ModelType> audiModels = repo.GetAllModelTypesByMake(0).ToList();
+            List<ModelType> fordModels = repo.GetAllModelTypesByMake(3).ToList();
 
             Assert.AreEqual(5, makes.Count);
             Assert.AreEqual(1, makes[0].MakeTypeId);

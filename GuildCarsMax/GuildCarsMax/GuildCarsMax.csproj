@@ -201,12 +201,17 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddMakeViewModel.cs" />
+    <Compile Include="Models\AddModelViewModel.cs" />
+    <Compile Include="Models\AddSpecialViewModel.cs" />
     <Compile Include="Models\AddVehicleViewModel.cs" />
     <Compile Include="Models\EditVehicleViewModel.cs" />
+    <Compile Include="Models\InventoryReportViewModel.cs" />
     <Compile Include="Models\PurchaseVehicleViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SalesReportViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -380,6 +385,13 @@
     <Content Include="Views\Admin\Vehicles.cshtml" />
     <Content Include="Views\Admin\AddVehicle.cshtml" />
     <Content Include="Views\Admin\EditVehicle.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\AddMake.cshtml" />
+    <Content Include="Views\Admin\AddModel.cshtml" />
+    <Content Include="Views\Admin\Specials.cshtml" />
+    <Content Include="Views\Admin\Reports.cshtml" />
+    <Content Include="Views\Admin\SalesReport.cshtml" />
+    <Content Include="Views\Admin\InventoryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

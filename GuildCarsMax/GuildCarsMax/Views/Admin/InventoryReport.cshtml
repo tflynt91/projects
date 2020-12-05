@@ -1,0 +1,84 @@
+﻿@model GuildCarsMax.Models.InventoryReportViewModel
+@{
+    ViewBag.Title = "InventoryReport";
+}
+<div class="row">
+    <h2>InventoryReport</h2>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+    <h6>New Vehicles</h6>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Make
+                    </th>
+                    <th>
+                        Model
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        Stock Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var car in Model.NewVehicles)
+                {
+                   <tr>
+                    <td>@car.Year</td>
+                    <td>@car.MakeType</td>
+                    <td>@car.ModelType</td>
+                    <td>@car.Count</td>
+                    <td>@string.Format("{0:C}",car.StockValue)</td>
+                   </tr>
+            }
+                </tbody>
+            </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h6>Used Vehicles</h6>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Make
+                    </th>
+                    <th>
+                        Model
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        Stock Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var car in Model.UsedVehicles)
+                {
+                    <tr>
+                        <td>@car.Year</td>
+                        <td>@car.MakeType</td>
+                        <td>@car.ModelType</td>
+                        <td>@car.Count</td>
+                        <td>@string.Format("{0:C}", car.StockValue)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
