@@ -5,12 +5,14 @@ using GuildCarsMax.Models.Tables;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations.Model;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
@@ -47,7 +49,7 @@ namespace GuildCarsMax.Controllers
         [HttpPost]
         public ActionResult AddVehicle(AddVehicleViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var repo = new VehicleInventoryRepository();
 
@@ -77,11 +79,11 @@ namespace GuildCarsMax.Controllers
 
                     return RedirectToAction("EditVehicle", new { id = model.Vehicle.VinNumber });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw ex;
                 }
-                }
+            }
             else
             {
                 var typesRepo = new TypesRepository();
@@ -95,7 +97,7 @@ namespace GuildCarsMax.Controllers
 
                 return View(model);
             }
-            
+
         }
 
         [Authorize(Roles = "admin")]
@@ -155,7 +157,7 @@ namespace GuildCarsMax.Controllers
                         }
                     }
                     else
-                    { 
+                    {
                         model.Vehicle.ImageFileName = oldVehicle.ImageFileName;
                     }
 
@@ -207,10 +209,10 @@ namespace GuildCarsMax.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult AddMake()
         {
-           var repo = new VehicleInventoryRepository();
-           var model = new AddMakeViewModel();
-           var makes = repo.GetMakeDetails();
-           model.Makes = makes;
+            var repo = new VehicleInventoryRepository();
+            var model = new AddMakeViewModel();
+            var makes = repo.GetMakeDetails();
+            model.Makes = makes;
 
             return View(model);
         }
@@ -292,7 +294,7 @@ namespace GuildCarsMax.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Specials()
         {
-            var repo = new VehicleInventoryRepository();          
+            var repo = new VehicleInventoryRepository();
             var model = new AddSpecialViewModel();
             model.Specials = repo.GetSpecials();
 
@@ -348,7 +350,7 @@ namespace GuildCarsMax.Controllers
 
                 var allUsers = userStore.Users.ToList();
                 List<UserShortItem> salesUsers = new List<UserShortItem>();
-                foreach(var user in allUsers)
+                foreach (var user in allUsers)
                 {
                     if (userManager.IsInRole(user.Id, "sales"))
                     {
@@ -356,7 +358,7 @@ namespace GuildCarsMax.Controllers
                         salesUser.UserId = user.Id;
                         salesUser.Name = $"{user.FirstName} {user.LastName}";
                         salesUsers.Add(salesUser);
-                        
+
                     }
                 }
                 model.FilterParameters = new SalesReportFilterParameters();
@@ -377,6 +379,6 @@ namespace GuildCarsMax.Controllers
 
             return View(model);
         }
-
     }
+        
 }

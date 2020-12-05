@@ -205,6 +205,7 @@
     <Compile Include="Models\AddModelViewModel.cs" />
     <Compile Include="Models\AddSpecialViewModel.cs" />
     <Compile Include="Models\AddVehicleViewModel.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\EditVehicleViewModel.cs" />
     <Compile Include="Models\InventoryReportViewModel.cs" />
     <Compile Include="Models\PurchaseVehicleViewModel.cs" />
@@ -356,7 +357,6 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
@@ -392,6 +392,8 @@
     <Content Include="Views\Admin\Reports.cshtml" />
     <Content Include="Views\Admin\SalesReport.cshtml" />
     <Content Include="Views\Admin\InventoryReport.cshtml" />
+    <Content Include="Views\Account\EditUser.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

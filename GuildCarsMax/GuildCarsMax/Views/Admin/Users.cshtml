@@ -8,6 +8,9 @@
     <h2>Users</h2>
 </div>
 <div class="row">
+    @Html.ActionLink("Add a new User", "Register", "Account")
+</div>
+<div class="row">
     <div class="col-sm-12">
 
             <table class="table table-striped">
@@ -38,7 +41,7 @@
                             <td>@user.LastName</td>
                             <td>@user.Email</td>
                             <td id="roleName">@user.Role</td>
-                            <td>@Html.ActionLink("Edit", "EditUser", "Admin", new { userId = user.UserId })</td>
+                            <td>@Html.ActionLink("Edit", "EditUser", "Account", new { userId = user.UserId }, null)</td>
                         </tr>
                     }
                 </tbody>

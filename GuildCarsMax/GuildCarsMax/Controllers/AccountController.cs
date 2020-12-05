@@ -14,6 +14,7 @@ using System.Data.Entity.Core.EntityClient;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Ajax.Utilities;
 using System.Web.Security;
+using static GuildCarsMax.UI.Controllers.ManageController;
 
 namespace GuildCarsMax.UI.Controllers
 {
@@ -74,10 +75,25 @@ namespace GuildCarsMax.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            var context = new ApplicationDbContext();
+            var roles = context.Roles.ToList();
+
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            ApplicationUser user = userStore.Users.Where(u => u.Email == model.Email).FirstOrDefault();
+            var selectedRole = userManager.GetRoles(user.Id).FirstOrDefault();
+
+            if(selectedRole == "disabled")
+            {
+                ModelState.AddModelError("", "User account is disabled.");
+                return View(model);
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -142,7 +158,7 @@ namespace GuildCarsMax.UI.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public ActionResult Register()
         {
             var context = new ApplicationDbContext();
@@ -157,7 +173,7 @@ namespace GuildCarsMax.UI.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -200,6 +216,96 @@ namespace GuildCarsMax.UI.Controllers
                 // If we got this far, something failed, redisplay form
                 return View(newModel);
             }
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult EditUser(string userId)
+        {
+            var model = new EditUserViewModel();
+            var context = new ApplicationDbContext();
+            var roles = context.Roles.ToList();
+
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            ApplicationUser user = userStore.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var selectedRole = userManager.GetRoles(user.Id).FirstOrDefault();
+
+            model.RoleList = new SelectList(roles, "Name", "Name", selectedRole);
+            model.User = user;
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.Email = user.Email;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult EditUser(EditUserViewModel model)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+
+                if (ModelState.IsValid)
+                {
+                    
+                    var roleStore = new RoleStore<IdentityRole>(context);
+
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+
+                    var user = userManager.FindById(model.User.Id);
+                    var oldRole = userManager.GetRoles(user.Id).FirstOrDefault();
+
+                    user.FirstName = model.FirstName;
+                    user.LastName = user.LastName;
+                    user.Email = user.Email;
+                    if (oldRole != model.Role)
+                    {
+                        if (!string.IsNullOrEmpty(oldRole))
+                        {
+                            userManager.RemoveFromRole(user.Id, oldRole);
+                        }
+                        userManager.AddToRole(user.Id, model.Role.ToString());
+                    }
+                    if(!string.IsNullOrEmpty(model.Password))
+                    {
+                        userManager.RemovePassword(user.Id);
+                        userManager.AddPassword(user.Id, model.Password);
+                    }
+
+
+                    userManager.Update(user);
+
+
+                    return RedirectToAction("Index", "Home");
+                    
+                }
+                else
+                {
+
+
+                    var roles = context.Roles.ToList();
+
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+
+                    ApplicationUser user = userStore.Users.Where(u => u.Id == model.User.Id).FirstOrDefault();
+                    var selectedRole = userManager.GetRoles(user.Id).FirstOrDefault();
+
+                    model.RoleList = new SelectList(roles, "Name", "Name", selectedRole);
+                    model.User = user;
+                    model.FirstName = user.FirstName;
+                    model.LastName = user.LastName;
+                    model.Email = user.Email;
+
+                    
+                }
+                return View(model);
+
+            }
+
         }
 
         //
@@ -261,11 +367,42 @@ namespace GuildCarsMax.UI.Controllers
 
         //
         // GET: /Account/ResetPassword
+        [Authorize(Roles = "admin,sales")]
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [Authorize(Roles = "admin,sales")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", "Home", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            AddErrors(result);
+            return View(model);
+        }
+
 
         //
         // POST: /Account/ResetPassword
@@ -452,6 +589,7 @@ namespace GuildCarsMax.UI.Controllers
 
             base.Dispose(disposing);
         }
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins
