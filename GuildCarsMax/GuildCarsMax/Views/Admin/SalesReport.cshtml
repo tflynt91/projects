@@ -11,20 +11,20 @@
         <h6>Filters</h6>
         <form method="post" id="salesSearch">
             <div class="row">
-                <label for="@Model.FilterParameters.UserId" class="col-form-label">Users</label>
+                <label for="@Model.FilterParameters.UserId" class="col-form-label mr-2">Users</label>
                 @Html.DropDownListFor(m => m.FilterParameters.UserId, Model.Users, "- All -", new { @class = "form-control col-sm-2", @id="userId" })
-                <label for="@Model.FilterParameters.FromDate" class="col-form-label">From Date</label>
+                <label for="@Model.FilterParameters.FromDate" class="col-form-label mx-2">From Date</label>
                 @Html.TextBoxFor(m => m.FilterParameters.FromDate, new { @class = "form-control col-sm-3", @id="fromDate" })
-                <label for="@Model.FilterParameters.ToDate" class="col-form-label">To Date</label>
+                <label for="@Model.FilterParameters.ToDate" class="col-form-label mx-2">To Date</label>
                 @Html.TextBoxFor(m => m.FilterParameters.ToDate, new { @class = "form-control col-sm-3", @id="toDate" })
             </div>
-            <div class="row">
-                <button class="btn btn-primary">Search</button>
+            <div class="row col-sm-7">
+                <button class="btn btn-primary my-2" id="searchButton">Search</button>
             </div>
         </form>
     </div>
 </div>
-<div class="row">
+<div class="row mt-2">
     <h6>Sales Results</h6>
 </div>
 <div class="col-sm-6">

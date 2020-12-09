@@ -77,7 +77,7 @@ namespace GuildCarsMax.Controllers
 
                     repo.Insert(model.Vehicle);
 
-                    return RedirectToAction("EditVehicle", new { id = model.Vehicle.VinNumber });
+                    return RedirectToAction("EditVehicle", new { vinNumber = model.Vehicle.VinNumber });
                 }
                 catch (Exception ex)
                 {
@@ -108,20 +108,26 @@ namespace GuildCarsMax.Controllers
             var typesRepo = new TypesRepository();
             var vehicleRepo = new VehicleInventoryRepository();
 
+            model.Vehicle = vehicleRepo.GetVehicle(vinNumber);
+            model.Vehicle.MakeTypeId = vehicleRepo.GetVehicleDetails(vinNumber).MakeTypeId;
+            model.Vehicle.ModelTypeId = vehicleRepo.GetVehicleDetails(vinNumber).ModelTypeId;
+            
             model.BodyStyles = new SelectList(typesRepo.GetAllBodyStyles(), "BodyStyleId", "BodyStyleName");
             model.ExteriorColors = new SelectList(typesRepo.GetAllExteriorColors(), "ExteriorColorId", "ExteriorColorName");
             model.InteriorColors = new SelectList(typesRepo.GetAllInteriorColors(), "InteriorColorId", "InteriorColorName");
+
             model.Makes = new SelectList(typesRepo.GetAllMakeTypes(), "MakeTypeId", "MakeTypeName");
+            model.Models = new SelectList(typesRepo.GetAllModelTypesByMake(model.Vehicle.MakeTypeId), "ModelTypeId", "ModelTypeName", model.Vehicle.ModelTypeId);
+
             model.NewOrUsedTypes = new SelectList(typesRepo.GetNewOrUsedTypeOptions(), "NewOrUsedTypeId", "NewOrUsedTypeOption");
             model.TransmissionTypes = new SelectList(typesRepo.GetAllTransmissionTypes(), "TransmissionTypeId", "TransmissionTypeName");
-            model.Vehicle = vehicleRepo.GetVehicle(vinNumber);
 
             return View(model);
         }
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult EditVehicle(AddVehicleViewModel model)
+        public ActionResult EditVehicle(EditVehicleViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -163,7 +169,7 @@ namespace GuildCarsMax.Controllers
 
                     repo.Update(model.Vehicle);
 
-                    return RedirectToAction("Edit", new { id = model.Vehicle.VinNumber });
+                    return RedirectToAction("EditVehicle", new { vinNumber = model.Vehicle.VinNumber });
                 }
                 catch (Exception ex)
                 {

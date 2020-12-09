@@ -62,3 +62,18 @@ textarea {
     color: #007bff;
 }
 
+#searchButton {
+    width: 35%;
+}
+
+#contactButton {
+    margin-left: auto;
+}
+
+.deleteSpecial {
+    margin-left: auto;
+}
+
+.dropdown-item {
+    text-align: center;
+}

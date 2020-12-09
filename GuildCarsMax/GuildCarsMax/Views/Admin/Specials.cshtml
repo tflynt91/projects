@@ -30,7 +30,7 @@
         }
     </div>
 </div>
-<div class="row">
+<div class="row mt-2">
     <div class="col-sm-12">
         @foreach (var special in Model.Specials)
         {
@@ -42,7 +42,7 @@
                 <div class="row">
                     <h6>@special.Title</h6>
                     <input type="hidden" id="@special.SpecialId" name="specialId" value=@special.SpecialId class="special-Id" />
-                    <a class="btn btn-danger deleteSpecial">Delete</a>
+                    <a class="btn btn-danger deleteSpecial ml-auto">Delete</a>
                 </div>
                 <div class="row">
                     <p>@special.SpecialDescription</p>

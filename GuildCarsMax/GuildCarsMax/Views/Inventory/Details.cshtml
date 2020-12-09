@@ -34,8 +34,8 @@
             <strong>Description: </strong>@Model.VehicleDescription
         </p>
     </div>
-    <div class="row">
-        <button class="btn btn-primary" onclick="window.location.href='@Url.Action("AddContact", "Home", new { message = Model.VinNumber })'">Contact Us</button>
+    <div class="row col-12">
+            <button class="btn btn-primary ml-auto" id="contactbutton" onclick="window.location.href='@Url.Action("AddContact", "Home", new { message = Model.VinNumber })'">Contact Us</button>
     </div>
 </div>
 

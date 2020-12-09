@@ -15,12 +15,13 @@
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label>Make</label>
-                    @Html.DropDownListFor(m => m.Makes, Model.Makes, new { @class = "form-control", id = "makeList" })
+                    @Html.DropDownListFor(m => m.Vehicle.MakeTypeId, Model.Makes, new { @class = "form-control", id = "makeList" })
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Model</label>
-                    <select class="form-control" id="modelList" name="Models">
-                    </select>
+                    @Html.DropDownListFor(m => m.Vehicle.ModelTypeId, Model.Models, new { @class = "form-control", id = "modelList" })
+                    <!-- <select class="form-control" id="modelList" name="ModelTypeId">
+                    </select> -->
                 </div>
             </div>
             <div class="row">
@@ -110,14 +111,21 @@
     <script>
         $(document).ready(function () {
             var makeId = $('#makeList');
+            var selectedId = @Model.Vehicle.ModelTypeId
             $('#makeList').change(function () {
                 $.ajax({
                     type: 'GET',
                     url: 'https://localhost:44349/api/Inventory/getModels?makeId=' + makeId.val(),
                     success: function (result) {
                         var markup = null;
+                        $('#modelList').empty();
                         for (var i = 0; i < result.length; i++) {
-                            markup += "<option value=" + result[i].ModelTypeId + ">" + result[i].ModelTypeName + "</option>";
+                            if (result[i].ModelTypeId == selectedId) {
+                                markup += "<option value=" + result[i].ModelTypeId + "selected='selected'>" + result[i].ModelTypeName + "</option>";
+                            }
+                            else {
+                                markup += "<option value=" + result[i].ModelTypeId + ">" + result[i].ModelTypeName + "</option>";
+                            }
                         }
                         $("#modelList").html(markup).show();
                     },

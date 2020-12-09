@@ -8,11 +8,15 @@
 </div>
 
 <div class="row">
-    <form id="searchForm" class="form-inline">
+    <h6>Quick Search</h6>
+</div>
+
+<form id="searchForm" class="form-inline">
+    <div class="row col-9">
         <label class="sr-only" for="makeModelYear">Make Model or Year</label>
         <input type="text" class="form-control mb-2 mr-sm-4" id="makeModelYear" placeholder="Enter make, model, or year">
 
-        <label for="minPrice">Price: </label>
+        <label for="minPrice" class="mr-2 mb-2">Price: </label>
         <select id="minPrice" class="form-control mb-2 mr-sm-2">
             <option selected>No Min</option>
             <option>5000</option>
@@ -51,7 +55,7 @@
             <option>19000</option>
             <option>20000</option>
         </select>
-        <label for="minYear">Year: </label>
+        <label for="minYear" class="mr-2 mb-2">Year: </label>
         <select id="minYear" class="form-control mb-2 mr-sm-2">
             <option selected>No Min</option>
             <option>2005</option>
@@ -90,10 +94,16 @@
             <option>2019</option>
             <option>2020</option>
         </select>
-        <button type="submit" class="btn btn-primary mb-2">Search</button>
-    </form>
-</div>
 
+        <br />
+        <div class="row col-12">
+            <br />
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary mb-2" id="searchButton">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
 <div>
     <div id="searchResults" class="col-xs-12">
 
@@ -144,7 +154,7 @@
                             '<br /><strong>VIN #: </strong>' + vehicle.VinNumber + '</p>' +
                             '<p class="searchListItem col-sm-3"><strong>Sale Price: </strong>' + vehicle.SalePrice +
                             '<br /><strong>MSRP: </strong>' + vehicle.MSRP +
-                            '<br /><button id="btnDetails" class="btn btn-default" onclick="window.location.href=\'/admin/editVehicle?vinNumber=' + vehicle.VinNumber + '\'">Edit</button></p></div>'
+                            '<br /><button id="btnDetails" class="btn btn-primary" onclick="window.location.href=\'/admin/editVehicle?vinNumber=' + vehicle.VinNumber + '\'">Edit</button></p></div>'
                         $('#searchResults').append(html);
                     });
                 },

@@ -4,20 +4,20 @@
     <li class="nav-item">
         <a class="nav-link" href="#">@Html.ActionLink("Sales", "Index", "Sales")</a>
     </li>
-        if (User.IsInRole("admin"))
-        {
+    if (User.IsInRole("admin"))
+    {
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Admin
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">@Html.ActionLink("Vehicles", "Vehicles", "Admin")</a>
-            <a class="dropdown-item" href="#">@Html.ActionLink("Add Vehicle", "AddVehicle", "Admin")</a>
-            <a class="dropdown-item" href="#">@Html.ActionLink("Makes", "AddMake", "Admin")</a>
-            <a class="dropdown-item" href="#">@Html.ActionLink("Models", "AddModel", "Admin")</a>
-            <a class="dropdown-item" href="#">@Html.ActionLink("Specials", "Specials", "Admin")</a>
-            <a class="dropdown-item" href="#">@Html.ActionLink("Users", "Users", "Admin")</a>
-            <a class="dropdown-item" href="#">@Html.ActionLink("Reports", "Reports", "Admin")</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Vehicles", "Vehicles", "Admin", null, new { @class="ml-2" })</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Add Vehicle", "AddVehicle", "Admin", null, new { @class = "ml-2" })</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Makes", "AddMake", "Admin", null, new { @class = "ml-2" })</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Models", "AddModel", "Admin", null, new { @class = "ml-2" })</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Specials", "Specials", "Admin", null, new { @class = "ml-2" })</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Users", "Users", "Admin", null, new { @class = "ml-2" })</a>
+            <a class="dropdown-item" href="#">@Html.ActionLink("Reports", "Reports", "Admin", null, new { @class = "ml-2" })</a>
         </div>
     </li>
     }

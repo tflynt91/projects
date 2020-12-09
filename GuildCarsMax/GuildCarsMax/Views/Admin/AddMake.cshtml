@@ -8,19 +8,21 @@
     <h2>Add Make</h2>
 </div>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-12">
         @using (Html.BeginForm("AddMake", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddContact" }))
         {
 
             @Html.ValidationSummary()
+
+        <div class="form-group">
             <div class="row">
-                <div class="form-group col-sm-8">
-                    <label>New Make</label>
-                    @Html.TextBoxFor(m => m.MakeParameters.MakeType, new { @class = "form-control" })
-                    @Html.HiddenFor(m => m.MakeParameters.UserId, new { Value = User.Identity.GetUserId() })
-                    <button class="btn btn-primary">Save</button>
-                </div>
+            <label class="mr-2 mt-1">New Make</label>
+                @Html.TextBoxFor(m => m.MakeParameters.MakeType, new { @class = "form-control col-sm-4 pb-2" })
+                @Html.HiddenFor(m => m.MakeParameters.UserId, new { Value = User.Identity.GetUserId() })
+                <button class="btn btn-primary ml-2">Save</button>
             </div>
+         </div>
+            
         }
     </div>
 </div>

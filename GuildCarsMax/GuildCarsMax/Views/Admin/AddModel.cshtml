@@ -7,22 +7,22 @@
     <h2>Add Model</h2>
 </div>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-12">
         @using (Html.BeginForm("AddModel", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddModel" }))
         {
 
             @Html.ValidationSummary()
             <div class="row">
-                <div class="form-group col-sm-4">
-                    <label>New Model</label>
+                <div class="form-group col-sm-3">
+                    <label col-sm-4>New Model</label>
                     @Html.TextBoxFor(m => m.ModelParameters.ModelType, new { @class = "form-control" })
                     @Html.HiddenFor(m => m.ModelParameters.UserId, new { Value = User.Identity.GetUserId() })
                 </div>
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-3">
                     <label>Make</label>
                     @Html.DropDownListFor(m => m.ModelParameters.MakeTypeId, Model.Makes, new { @class = "form-control", id = "makeList" })
                 </div>
-                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-primary my-3">Save</button>
             </div>
         }
     </div>

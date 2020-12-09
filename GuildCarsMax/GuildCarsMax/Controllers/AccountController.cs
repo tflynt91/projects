@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Ajax.Utilities;
 using System.Web.Security;
 using static GuildCarsMax.UI.Controllers.ManageController;
+using System.Collections;
 
 namespace GuildCarsMax.UI.Controllers
 {
@@ -24,7 +25,7 @@ namespace GuildCarsMax.UI.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         
-
+        
         public AccountController()
         {
         }
