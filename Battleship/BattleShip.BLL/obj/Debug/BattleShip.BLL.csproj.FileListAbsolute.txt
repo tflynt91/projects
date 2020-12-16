@@ -9,3 +9,9 @@ C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.BLL\obj\Debug
 C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.csproj.CoreCompileInputs.cache
 C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.dll
 C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.pdb
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.BLL\bin\Debug\BattleShip.BLL.dll
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.BLL\bin\Debug\BattleShip.BLL.pdb
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.csprojAssemblyReference.cache
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.csproj.CoreCompileInputs.cache
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.dll
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.BLL\obj\Debug\BattleShip.BLL.pdb

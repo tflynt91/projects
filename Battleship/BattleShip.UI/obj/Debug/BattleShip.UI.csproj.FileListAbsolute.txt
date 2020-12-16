@@ -14,3 +14,13 @@ C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\
 C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.BLL.dll
 C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\bin\Debug\BattleShip.BLL.pdb
 C:\Users\flynt\Documents\GitHub\TFlynt_Repos\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csproj.CopyComplete
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\bin\Debug\BattleShip.UI.exe.config
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\bin\Debug\BattleShip.UI.exe
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\bin\Debug\BattleShip.UI.pdb
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\bin\Debug\BattleShip.BLL.dll
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\bin\Debug\BattleShip.BLL.pdb
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csprojAssemblyReference.cache
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csproj.CoreCompileInputs.cache
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.csproj.CopyComplete
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.exe
+C:\Users\flynt\Documents\GitHub\projects\Battleship\BattleShip.UI\obj\Debug\BattleShip.UI.pdb
