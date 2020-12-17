@@ -77,3 +77,8 @@ textarea {
 .dropdown-item {
     text-align: center;
 }
+
+.imageResult {
+    width: 120px;
+    height: auto;
+}

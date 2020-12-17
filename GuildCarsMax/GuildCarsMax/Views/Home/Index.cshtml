@@ -44,7 +44,7 @@
     @foreach (var feature in Model.FeaturedVehicles)
     {
     <div class="col-sm-3">
-        <p class="featuredVehicle"><img src="@Url.Content("~/Images/" + feature.ImageFileName)" /></p>
+        <p class="featuredVehicle"><img class="imageResult" src="@Url.Content("~/Images/" + feature.ImageFileName)" /></p>
         <p class="featuredVehicle">@feature.Year, @feature.MakeType, @feature.ModelType</p>
         <p class="featuredVehicle">@feature.SalePrice.ToString("c")</p>
     </div>

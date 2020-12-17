@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\FlooringOrderingSystem.BLL",
+    "\\FlooringOrderingSystem.Data",
+    "\\FlooringOrderingSystem.Models",
+    "\\FlooringOrderingSystem.UI"
+  ],
+  "SelectedNode": "\\FlooringOrderingSystem.Models\\Order.cs",
+  "PreviewInSolutionExplorer": false
+}

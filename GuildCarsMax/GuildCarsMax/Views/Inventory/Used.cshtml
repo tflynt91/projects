@@ -145,7 +145,7 @@
                     $.each(results, function (index, vehicle) {
                         var html = '<div class="col-12">' +
                             '<div class="row col-12"><p class="searchListItem"><strong>' + vehicle.Year + ' ' + vehicle.MakeType + ' ' + vehicle.ModelType + '</strong></p></div>' +
-                            '<div class="row"><p class="searchListItem col-sm-3"><img src="' + imagePath + vehicle.ImageFileName + '" /></p>' +
+                            '<div class="row"><p class="searchListItem imageResult col-sm-3"><img class="imageResult" src="' + imagePath + vehicle.ImageFileName + '" /></p>' +
                             '<p class="searchListItem col-sm-3"><strong>Body Style: </strong>' + vehicle.BodyStyle +
                             '<br /><strong>Trans: </strong>' + vehicle.TransmissionType +
                             '<br /><strong>Color: </strong>' + vehicle.ExteriorColor + '</p>' +
