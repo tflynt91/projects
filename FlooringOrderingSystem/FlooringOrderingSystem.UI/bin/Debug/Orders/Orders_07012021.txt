@@ -1,0 +1,5 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+
+
+3,,Ohio,6.25,Wood,200,5.15,4.75,1030.00,950.00,123.75,2103.75
+4,Flynt,Ohio,6.25,Tile,150,3.50,4.15,525.00,622.50,71.72,1219.22

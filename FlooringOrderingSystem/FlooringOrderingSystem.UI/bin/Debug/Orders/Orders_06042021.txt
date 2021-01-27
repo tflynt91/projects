@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Flynt,Michigan,5.75,Tile,150,3.50,4.15,525.00,622.50,65.98,1213.48

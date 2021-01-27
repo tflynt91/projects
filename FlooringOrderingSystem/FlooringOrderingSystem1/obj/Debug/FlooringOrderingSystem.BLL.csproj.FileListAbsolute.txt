@@ -1,0 +1,14 @@
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\obj\Debug\FlooringOrderingSystem.BLL.csprojAssemblyReference.cache
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\obj\Debug\FlooringOrderingSystem.BLL.csproj.CoreCompileInputs.cache
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem1.dll.config
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem1.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem1.pdb
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem.Data.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem.Models.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem.Data.pdb
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem.Data.dll.config
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem.Models.pdb
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\bin\Debug\FlooringOrderingSystem.Models.dll.config
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\obj\Debug\FlooringOrderingSystem.BLL.csproj.CopyComplete
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\obj\Debug\FlooringOrderingSystem1.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem1\obj\Debug\FlooringOrderingSystem1.pdb

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8F6FFA39-19F3-420C-AE6B-E6B1B2BB1025}</ProjectGuid>
+    <ProjectGuid>{46E24F4F-D74D-4886-8CBE-72769E2EDFBF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>FlooringOrderingSystem.UI</RootNamespace>
     <AssemblyName>FlooringOrderingSystem.UI</AssemblyName>
@@ -34,7 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,20 +46,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ConsoleIO.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflows\AddOrderWorkflow.cs" />
+    <Compile Include="Workflows\DisplayOrderWorkflow.cs" />
+    <Compile Include="Workflows\EditOrderWorkflow.cs" />
+    <Compile Include="Workflows\RemoveOrderWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlooringOrderingSystem.BLL\FlooringOrderingSystem.BLL.csproj">
-      <Project>{b3851c44-9421-4089-8822-f32a52994d38}</Project>
-      <Name>FlooringOrderingSystem.BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FlooringOrderingSystem.Models\FlooringOrderingSystem.Models.csproj">
-      <Project>{c867d139-7cfb-42c9-8c7c-79e95a9b3611}</Project>
+      <Project>{3457d06d-a35e-415f-b121-50aaa2610038}</Project>
       <Name>FlooringOrderingSystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlooringOrderingSystem1\FlooringOrderingSystem.BLL.csproj">
+      <Project>{eec28a52-898a-4e34-911d-0253658695f7}</Project>
+      <Name>FlooringOrderingSystem.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

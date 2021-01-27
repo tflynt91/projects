@@ -1,0 +1,4 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1,Flynt,Ohio,6.25,Carpet,300,2.25,2.10,675.00,630.00,81.56,1386.56
+2,Flynt,Ohio,6.25,Wood,500,5.15,4.75,2575.00,2375.00,309.38,5259.38
+3,Krendall,Ohio,6.25,Laminate,700,1.75,2.10,1225.00,1470.00,168.44,2863.44

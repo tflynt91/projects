@@ -14,7 +14,7 @@ namespace FlooringOrderingSystem.Models
         public decimal TaxRate { get; set; }
         public string ProductType { get; set; }
         public decimal Area { get; set; }
-        public decimal CostPerSquareFood { get; set; }
+        public decimal CostPerSquareFoot { get; set; }
         public decimal LaborCostPerSquareFoot { get; set; }
         public decimal MaterialCost { get; set; }
         public decimal LaborCost { get; set; }

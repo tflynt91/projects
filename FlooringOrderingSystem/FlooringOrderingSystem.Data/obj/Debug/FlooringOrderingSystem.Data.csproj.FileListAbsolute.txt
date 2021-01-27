@@ -1,0 +1,11 @@
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\bin\Debug\FlooringOrderingSystem.Data.dll.config
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\bin\Debug\FlooringOrderingSystem.Data.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\bin\Debug\FlooringOrderingSystem.Data.pdb
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\bin\Debug\FlooringOrderingSystem.Models.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\bin\Debug\FlooringOrderingSystem.Models.pdb
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\bin\Debug\FlooringOrderingSystem.Models.dll.config
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\obj\Debug\FlooringOrderingSystem.Data.csprojAssemblyReference.cache
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\obj\Debug\FlooringOrderingSystem.Data.csproj.CoreCompileInputs.cache
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\obj\Debug\FlooringOrderingSystem.Data.csproj.CopyComplete
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\obj\Debug\FlooringOrderingSystem.Data.dll
+C:\Users\flynt\source\repos\FlooringOrderingSystem.Data\obj\Debug\FlooringOrderingSystem.Data.pdb

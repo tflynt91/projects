@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\bin",
+    "\\obj",
+    "\\Properties"
   ],
+  "SelectedNode": "\\App.config",
   "PreviewInSolutionExplorer": false
 }

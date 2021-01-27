@@ -4,8 +4,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C867D139-7CFB-42C9-8C7C-79E95A9B3611}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{3457D06D-A35E-415F-B121-50AAA2610038}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <RootNamespace>FlooringOrderingSystem.Models</RootNamespace>
     <AssemblyName>FlooringOrderingSystem.Models</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,9 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IOrderRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\DisplayOrderResponse.cs" />
+    <Compile Include="Responses\LookupOrderResponse.cs" />
+    <Compile Include="Responses\ProductLookupResponse.cs" />
+    <Compile Include="Responses\Response.cs" />
+    <Compile Include="Responses\StateLookupResponse.cs" />
     <Compile Include="TaxInfo.cs" />
   </ItemGroup>
   <ItemGroup>
